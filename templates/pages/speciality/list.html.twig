@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}- Formulaire création SPECIALITE
+{% block title %} - Liste des SPECIALITES
 {% endblock %}
 
 {% block body %}
@@ -14,6 +14,7 @@
 					<tr>
 						<th scope="col">#</th>
 						<th scope="col">Nom </th>
+						<th scope="col">Action</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -21,6 +22,11 @@
 					<tr>
 							<td>{{speciality.id}}</td>
 							<td>{{speciality.name}}</td>
+							<td>
+								<a href="{{path('app_speciality_edit', {id: speciality.id})}}">edit</a>
+								&nbsp
+								<a href="{{path('app_speciality_delete', {id: speciality.id})}}">delete</a>
+							</td>
 					</tr>
 						{% endfor %}
 

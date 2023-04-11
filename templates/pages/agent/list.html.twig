@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}- Liste des AGENTS
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1 class='text-center'>LISTE DES AGENTS</h1>
+		<br>
+		<br>
+		<section>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Prenom
+						</th>
+						<th scope="col">Nom
+						</th>
+						<th scope="col">Date de naissance
+						</th>
+						<th scope="col">Code d'identification
+						</th>
+						<th scope="col">Specialités
+						</th>
+						<th scope="col">Action
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for agent in agents %}
+						<tr>
+							<td>{{agent.id}}</td>
+							<td>{{agent.firstName}}</td>
+							<td>{{agent.lastName}}</td>
+							<td>{{agent.birthDate | date("d/m/Y")}}</td>
+							<td>{{agent.idCode}}</td>
+							<td>
+								{% for speciality in agent.speciality %}
+									{{speciality.name}}
+									<br>
+								{% endfor %}
+							</td>
+							<td>
+								<a href="{{path('app_agent_edit', {id: agent.id})}}">edit</a>
+								&nbsp
+								<a href="{{path('app_agent_delete', {id: agent.id})}}">delete</a>
+							</td>
+						</tr>
+					{% endfor %}
+
+				</tbody>
+			</table>
+
+		</section>
+	</div>
+{% endblock %}

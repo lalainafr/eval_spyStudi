@@ -28,7 +28,7 @@ class SpecialityController extends AbstractController
         $speciality =  new Speciality();
         $form = $this->createForm(SpecialityType::class, $speciality);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $speciality = $form->getData();
             $em->persist($speciality);
             $em->flush();
@@ -37,5 +37,29 @@ class SpecialityController extends AbstractController
         return $this->render('pages/speciality/new.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    #[Route('/speciality/edit/{id}', name: 'app_speciality_edit')]
+    public function edit($id, SpecialityRepository $specialityRepository, Request $request, EntityManagerInterface $em): Response
+    {
+        $speciality =  $specialityRepository->findOneBy(['id' => $id]);
+        $form = $this->createForm(SpecialityType::class, $speciality);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+            return $this->redirectToRoute('app_speciality_list');
+        }
+        return $this->render('pages/speciality/edit.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/speciality/delete/{id}', name: 'app_speciality_delete')]
+    public function delete($id, SpecialityRepository $specialityRepository, Request $request, EntityManagerInterface $em): Response
+    {
+        $speciality =  $specialityRepository->findOneBy(['id' => $id]);
+        $em->remove($speciality);
+        $em->flush();
+        return $this->redirectToRoute('app_speciality_list');
     }
 }
