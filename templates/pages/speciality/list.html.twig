@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}- Formulaire création SPECIALITE
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+    <h1 class='text-center'>LISTE DES SPECIALITES</h1>
+    <br>
+    <br>
+		<section>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Nom </th>
+					</tr>
+				</thead>
+				<tbody>
+						{% for speciality in specialities %}
+					<tr>
+							<td>{{speciality.id}}</td>
+							<td>{{speciality.name}}</td>
+					</tr>
+						{% endfor %}
+
+				</tbody>
+			</table>
+
+		</section>
+	</div>
+{% endblock %}
