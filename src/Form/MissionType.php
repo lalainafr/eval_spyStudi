@@ -35,7 +35,7 @@ class MissionType extends AbstractType
             ])
             ->add('agent', EntityType::class, [
                 'class' => Agent::class,
-                'expanded' => true,
+                'expanded' => false,
                 'multiple' => true,
                 'label' => 'Agent'
             ])

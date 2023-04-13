@@ -36,17 +36,18 @@
 							<td>{{mission.codeName}}</td>
 							<td>
 								{% for agent in mission.agent %}
+									{{agent.firstName}}
 									{{agent.lastName}}
 									<br>
 								{% endfor %}
 							<td>{{mission.startDate | date("d/m/Y")}}</td>
 							<td>{{mission.endDate | date("d/m/Y")}}</td>
 							</td>
-							{# <td>
-								<a href="{{path('app_agent_edit', {id: agent.id})}}">edit</a>
+							<td>
+								<a href="{{path('app_mission_edit', {id: mission.id})}}">edit</a>
 								&nbsp
-								<a href="{{path('app_agent_delete', {id: agent.id})}}">delete</a>
-							</td> #}
+								<a href="{{path('app_mission_delete', {id: mission.id})}}">delete</a>
+							</td>
 						</tr>
 					{% endfor %}
 

@@ -42,7 +42,7 @@ class Agent
 
     public function __toString()
     {
-        return $this->getLastName(). $this->getFirstName();
+        return $this->getLastName(). ' ' . $this->getFirstName();
     }
 
     public function getId(): ?int
