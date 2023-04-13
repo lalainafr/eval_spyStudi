@@ -37,6 +37,9 @@ class Mission
     #[ORM\ManyToOne(inversedBy: 'missions')]
     private ?Type $type = null;
 
+    #[ORM\ManyToOne(inversedBy: 'missions')]
+    private ?Status $status = null;
+
     public function __construct()
     {
         $this->agent = new ArrayCollection();
@@ -139,6 +142,18 @@ class Mission
     public function setType(?Type $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getStatus(): ?Status
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?Status $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

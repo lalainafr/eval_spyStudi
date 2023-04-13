@@ -1,25 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} - Liste des SPECIALITES
+{% block title %}
+	- Liste des SPECIALITES
 {% endblock %}
 
 {% block body %}
 	<div class="container">
-    <h1 class='text-center'>LISTE DES SPECIALITES</h1>
-    <br>
-    <br>
+		<h1 class='text-center'>LISTE DES SPECIALITES</h1>
+		<br>
+		<br>
+		<a href="{{path('app_speciality_new')}}">Ajouter</a>
 		<section>
 			<table class="table">
 				<thead>
 					<tr>
 						<th scope="col">#</th>
-						<th scope="col">Nom </th>
+						<th scope="col">Nom
+						</th>
 						<th scope="col">Action</th>
 					</tr>
 				</thead>
 				<tbody>
-						{% for speciality in specialities %}
-					<tr>
+					{% for speciality in specialities %}
+						<tr>
 							<td>{{speciality.id}}</td>
 							<td>{{speciality.name}}</td>
 							<td>
@@ -27,8 +30,8 @@
 								&nbsp
 								<a href="{{path('app_speciality_delete', {id: speciality.id})}}">delete</a>
 							</td>
-					</tr>
-						{% endfor %}
+						</tr>
+					{% endfor %}
 
 				</tbody>
 			</table>

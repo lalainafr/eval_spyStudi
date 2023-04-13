@@ -8,6 +8,7 @@
 		<h1 class='text-center'>LISTE DES AGENTS</h1>
 		<br>
 		<br>
+		<a href="{{path('app_agent_new')}}">Ajouter</a>
 		<section>
 			<table class="table">
 				<thead>
@@ -37,7 +38,8 @@
 							<td>{{agent.idCode}}</td>
 							<td>
 								{% for speciality in agent.speciality %}
-									{{speciality.name}} <br>
+									{{speciality.name}}
+									<br>
 								{% endfor %}
 							</td>
 							<td>

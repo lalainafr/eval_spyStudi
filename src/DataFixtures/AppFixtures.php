@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Agent;
 use App\Entity\Mission;
 use App\Entity\Speciality;
+use App\Entity\Status;
 use App\Entity\Type;
 use Faker\Factory;
 use Faker\Generator;
@@ -40,7 +41,6 @@ class AppFixtures extends Fixture
             $specialities[] =  $speciality;
         }
 
-
         //AGENT
         $agents = [];
         for ($i=0; $i < 5; $i++) { 
@@ -65,6 +65,15 @@ class AppFixtures extends Fixture
             $typesArray[] = $type;
         }
 
+        //STATUT
+        $statuses =  ['En preparation', 'En cours', 'Terminé', 'Echec'];
+        for ($i=0; $i < 4; $i++) { 
+            $status = new Status();
+            $status->setName($statuses[$i]);
+            $manager->persist($status);
+            $statusArray[] = $status;
+        }
+
         //MISSION
         $missions = [];
         for ($i=0; $i < 5; $i++) { 
@@ -76,6 +85,7 @@ class AppFixtures extends Fixture
             $mission->setEndDate($this->faker->dateTimeBetween('+ 20 day', '+ 30 days'));
             $mission->addAgent($agents[mt_rand(0, count($agents) - 1)]);
             $mission->setType($typesArray[mt_rand(0, count($typesArray) - 1)]);
+            $mission->setStatus($statusArray[mt_rand(0, count($statusArray) - 1)]);
         
             $manager->persist($mission);
             $missions[] = $mission;

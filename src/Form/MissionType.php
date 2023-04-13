@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Agent;
 use App\Entity\Mission;
+use App\Entity\Status;
 use App\Entity\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -43,6 +44,10 @@ class MissionType extends AbstractType
             ->add('type', EntityType::class, [
                 'class' => Type::class,
                 'label' => 'Type de mission'
+            ])
+            ->add('status', EntityType::class, [
+                'class' => Status::class,
+                'label' => 'Statut de la mission'
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Valider',

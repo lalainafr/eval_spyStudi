@@ -8,6 +8,7 @@
 		<h1 class='text-center'>LISTE DES MISSIONS</h1>
 		<br>
 		<br>
+		<a href="{{path('app_mission_new')}}">Ajouter</a>
 		<section>
 			<table class="table">
 				<thead>
@@ -22,6 +23,8 @@
 						<th scope="col">Agent
 						</th>
 						<th scope="col">Type
+						</th>
+						<th scope="col">Statut
 						</th>
 						<th scope="col">Début
 						</th>
@@ -46,6 +49,9 @@
 							</td>
 							<td>
 								{{mission.type.name}}
+							</td>
+							<td>
+								{{mission.status.name}}
 							</td>
 							<td>{{mission.startDate | date("d/m/Y")}}</td>
 							<td>{{mission.endDate | date("d/m/Y")}}</td>
