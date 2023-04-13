@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Agent;
+use App\Entity\Mission;
 use App\Entity\Speciality;
 use Faker\Factory;
 use Faker\Generator;
@@ -33,7 +34,7 @@ class AppFixtures extends Fixture
         $specialities = [];
         for ($i=0; $i < 5; $i++) { 
             $speciality = new Speciality();
-            $speciality->setName('SPECIALITE - '. $this->faker->text(8));
+            $speciality->setName('SPECIALITE - '. $this->faker->word(8));
             $manager->persist($speciality);
             $specialities[] =  $speciality;
         }
@@ -53,6 +54,22 @@ class AppFixtures extends Fixture
             $manager->persist($agent);
             $agents[] = $agent;
         }
+
+        //MISSION
+        $missions = [];
+        for ($i=0; $i < 5; $i++) { 
+            $mission= new Mission();
+            $mission->setTitle('MISSION - ' . $this->faker->word(10));
+            $mission->setDescription($this->faker->text(100));
+            $mission->setCodeName('CODE - ' . $this->faker->word(8));
+            $mission->setStartDate($this->faker->dateTimeBetween('+ 1 day', '+ 10 days'));
+            $mission->setEndDate($this->faker->dateTimeBetween('+ 20 day', '+ 30 days'));
+            $mission->addAgent($agents[mt_rand(1, count($agents) - 1)]);
+            
+            $manager->persist($mission);
+            $missions[] = $mission;
+        }
+
         $manager->flush();
     }
 }

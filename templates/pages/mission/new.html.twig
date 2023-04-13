@@ -1,22 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}- Formulaire création AGENT
+{% block title %}- Formulaire création MISSION
 {% endblock %}
 
 {% block body %}
 	<div class="container">
 		<section class="row justify-content-center">
-			<h1 class='text-center text-muted'>AJOUTER UN AGENT</h1>
+			<h1 class='text-center text-muted'>AJOUTER UNE MISSION</h1>
 			<br>
 			<br>
 			<div class="col-md-4">
 				{{ form_start(form) }}
 				<br>
-				{{ form_row(form.firstName) }}
-				{{ form_row(form.lastName) }}
-				{{ form_row(form.birthDate) }}
-				{{ form_row(form.idCode) }}
-				{{ form_row(form.speciality) }}
+				{{ form_row(form.title) }}
+				{{ form_row(form.description) }}
+				{{ form_row(form.codeName) }}
+				{{ form_row(form.agent) }}
+				{{ form_row(form.startDate) }}
+				{{ form_row(form.endDate) }}
 				<br>
 				{{ form_row(form.submit) }}
 				{{ form_end(form) }}

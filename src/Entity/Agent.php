@@ -31,9 +31,18 @@ class Agent
     #[ORM\ManyToMany(targetEntity: Speciality::class, inversedBy: 'agents')]
     private Collection $speciality;
 
+    #[ORM\ManyToMany(targetEntity: Mission::class, mappedBy: 'agent')]
+    private Collection $missions;
+
     public function __construct()
     {
         $this->speciality = new ArrayCollection();
+        $this->missions = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getLastName(). $this->getFirstName();
     }
 
     public function getId(): ?int
@@ -109,6 +118,33 @@ class Agent
     public function removeSpeciality(Speciality $speciality): self
     {
         $this->speciality->removeElement($speciality);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Mission>
+     */
+    public function getMissions(): Collection
+    {
+        return $this->missions;
+    }
+
+    public function addMission(Mission $mission): self
+    {
+        if (!$this->missions->contains($mission)) {
+            $this->missions->add($mission);
+            $mission->addAgent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMission(Mission $mission): self
+    {
+        if ($this->missions->removeElement($mission)) {
+            $mission->removeAgent($this);
+        }
 
         return $this;
     }
