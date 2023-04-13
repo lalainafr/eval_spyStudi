@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Agent;
 use App\Entity\Mission;
 use App\Entity\Speciality;
+use App\Entity\Type;
 use Faker\Factory;
 use Faker\Generator;
 use Doctrine\Persistence\ObjectManager;
@@ -49,10 +50,19 @@ class AppFixtures extends Fixture
             $agent->setBirthDate($this->faker->dateTimeBetween('- 30 year', '- 20 year'));
             $agent->setIdCode($this->faker->text(8));
             for ($j=0; $j < mt_rand(1,3); $j++) { 
-                $agent->addSpeciality($specialities[mt_rand(1, count($specialities) - 1)]);
+                $agent->addSpeciality($specialities[mt_rand(0, count($specialities) - 1)]);
             }
             $manager->persist($agent);
             $agents[] = $agent;
+        }
+
+        //TYPE
+        $types =  ['Infiltration', 'Surveillance', 'Assassinat'];
+        for ($i=0; $i < 3; $i++) { 
+            $type = new Type();
+            $type->setName($types[$i]);
+            $manager->persist($type);
+            $typesArray[] = $type;
         }
 
         //MISSION
@@ -64,8 +74,9 @@ class AppFixtures extends Fixture
             $mission->setCodeName('CODE - ' . $this->faker->word(8));
             $mission->setStartDate($this->faker->dateTimeBetween('+ 1 day', '+ 10 days'));
             $mission->setEndDate($this->faker->dateTimeBetween('+ 20 day', '+ 30 days'));
-            $mission->addAgent($agents[mt_rand(1, count($agents) - 1)]);
-            
+            $mission->addAgent($agents[mt_rand(0, count($agents) - 1)]);
+            $mission->setType($typesArray[mt_rand(0, count($typesArray) - 1)]);
+        
             $manager->persist($mission);
             $missions[] = $mission;
         }

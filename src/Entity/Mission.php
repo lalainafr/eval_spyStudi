@@ -34,6 +34,9 @@ class Mission
     #[ORM\Column(length: 255)]
     private ?string $codeName = null;
 
+    #[ORM\ManyToOne(inversedBy: 'missions')]
+    private ?Type $type = null;
+
     public function __construct()
     {
         $this->agent = new ArrayCollection();
@@ -124,6 +127,18 @@ class Mission
     public function setCodeName(string $codeName): self
     {
         $this->codeName = $codeName;
+
+        return $this;
+    }
+
+    public function getType(): ?Type
+    {
+        return $this->type;
+    }
+
+    public function setType(?Type $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }

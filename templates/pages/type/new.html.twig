@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}- Formulaire création TYPE DE MISSION
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<section class="row justify-content-center">
+			<h1 class='text-center text-muted'>AJOUTER UN TYPE DE MISSION</h1>
+			<br>
+			<br>
+			<div class="col-md-4">
+				{{ form_start(form) }}
+				<br>
+				{{ form_row(form.name) }}
+				<br>
+				{{ form_row(form.submit) }}
+				{{ form_end(form) }}
+			</div>
+		</section>
+	</div>
+{% endblock %}

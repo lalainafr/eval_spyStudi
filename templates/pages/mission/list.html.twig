@@ -21,9 +21,13 @@
 						</th>
 						<th scope="col">Agent
 						</th>
+						<th scope="col">Type
+						</th>
 						<th scope="col">Début
 						</th>
 						<th scope="col">Fin
+						</th>
+						<th scope="col">Action
 						</th>
 					</tr>
 				</thead>
@@ -38,22 +42,24 @@
 								{% for agent in mission.agent %}
 									{{agent.firstName}}
 									{{agent.lastName}}
-									<br>
 								{% endfor %}
+							</td>
+							<td>
+								{{mission.type.name}}
+							</td>
 							<td>{{mission.startDate | date("d/m/Y")}}</td>
 							<td>{{mission.endDate | date("d/m/Y")}}</td>
-							</td>
+
 							<td>
 								<a href="{{path('app_mission_edit', {id: mission.id})}}">edit</a>
 								&nbsp
 								<a href="{{path('app_mission_delete', {id: mission.id})}}">delete</a>
 							</td>
 						</tr>
-					{% endfor %}
+					</tbody>
+				{% endfor %}
 
-				</tbody>
-			</table>
-
-		</section>
-	</div>
-{% endblock %}
+			</tbody>
+		</table>
+	</section>
+</div>{% endblock %}

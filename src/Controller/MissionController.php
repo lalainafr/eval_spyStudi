@@ -38,18 +38,19 @@ class MissionController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
+    
     #[Route('/mission/edit/{id}', name: 'app_mission_edit')]
     public function edit($id, Request $request, EntityManagerInterface $em, MissionRepository $missionRepository): Response
     {
         $mission =  $missionRepository->findOneBy(['id' => $id]);
         $form = $this->createForm(MissionType::class, $mission);
         $form->handleRequest($request);
+        $mission = $form->getData();
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
             return $this->redirectToRoute('app_mission_list');
         }
-        return $this->render('pages/mission/new.html.twig', [
+        return $this->render('pages/mission/edit.html.twig', [
             'form' => $form->createView(),
         ]);
     }
