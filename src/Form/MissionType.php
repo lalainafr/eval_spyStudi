@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Agent;
 use App\Entity\Country;
+use App\Entity\Hideout;
 use App\Entity\Mission;
 use App\Entity\Speciality;
 use App\Entity\Status;
@@ -30,12 +31,10 @@ class MissionType extends AbstractType
             ->add('startDate', null, [
                 'widget' => 'single_text',
                 'label' => 'Début de la mission',
-
             ])
             ->add('endDate', null, [
                 'widget' => 'single_text',
                 'label' => 'Fin de la mission',
-
             ])
             ->add('agent', EntityType::class, [
                 'class' => Agent::class,
@@ -45,19 +44,32 @@ class MissionType extends AbstractType
             ])
             ->add('type', EntityType::class, [
                 'class' => Type::class,
-                'label' => 'Type de mission'
+                'label' => 'Type',
+                'placeholder' => 'Choisir le type de la mission'
             ])
             ->add('status', EntityType::class, [
                 'class' => Status::class,
-                'label' => 'Statut de la mission'
+                'label' => 'Statut',
+                'placeholder' => 'Choisir le statut de la mission'
+
             ])
             ->add('country', EntityType::class, [
                 'class' => Country::class,
-                'label' => 'Pays de la mission'
+                'label' => 'Pays',
+                'placeholder' => 'Choisir le pays de la mission'
+
             ])
             ->add('speciality', EntityType::class, [
                 'class' => Speciality::class,
-                'label' => 'Specilaité requise'
+                'label' => 'Specilaité requise',
+                'placeholder' => 'Choisir une spécialité'
+
+            ])
+            ->add('hideout', EntityType::class, [
+                'class' => Hideout::class,
+                'expanded' => true,
+                'multiple' => true,
+                'label' => 'Planque'
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Valider',

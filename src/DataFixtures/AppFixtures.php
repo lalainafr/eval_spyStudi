@@ -8,6 +8,7 @@ use Faker\Generator;
 use App\Entity\Agent;
 use App\Entity\Status;
 use App\Entity\Country;
+use App\Entity\Hideout;
 use App\Entity\Mission;
 use App\Entity\Speciality;
 use Doctrine\Persistence\ObjectManager;
@@ -37,7 +38,7 @@ class AppFixtures extends Fixture
         $specialities = [];
         for ($i=0; $i < 5; $i++) { 
             $speciality = new Speciality();
-            $speciality->setName('SPECIALITE - '. $this->faker->word(8));
+            $speciality->setName('SPE - '. $this->faker->word(8));
             $manager->persist($speciality);
             $specialities[] =  $speciality;
         }
@@ -76,7 +77,6 @@ class AppFixtures extends Fixture
         }
 
         //COUNTRY
-
         for ($i=0; $i < 4; $i++) { 
             $country = new Country();
             $country->setName($this->faker->country());
@@ -84,13 +84,23 @@ class AppFixtures extends Fixture
             $countries[] = $country;
         }
 
+        //PLANQUE
+        for ($i=0; $i < 4; $i++) { 
+            $hideout = new Hideout();
+            $hideout->setCode('PLQ - '. $this->faker->text(8));
+            $hideout->setAddress($this->faker->address());
+            $hideout->setType('PLTYPE - '. $this->faker->text(8));
+            $manager->persist($hideout);
+            $hideouts[] = $hideout;
+        }
+
         //MISSION
         $missions = [];
         for ($i=0; $i < 5; $i++) { 
             $mission= new Mission();
-            $mission->setTitle('MISSION - ' . $this->faker->word(10));
+            $mission->setTitle('MIS - ' . $this->faker->word(10));
             $mission->setDescription($this->faker->text(100));
-            $mission->setCodeName('CODE - ' . $this->faker->word(8));
+            $mission->setCodeName('COD - ' . $this->faker->word(8));
             $mission->setStartDate($this->faker->dateTimeBetween('+ 1 day', '+ 10 days'));
             $mission->setEndDate($this->faker->dateTimeBetween('+ 20 day', '+ 30 days'));
             $mission->addAgent($agents[mt_rand(0, count($agents) - 1)]);
@@ -98,6 +108,7 @@ class AppFixtures extends Fixture
             $mission->setStatus($statusArray[mt_rand(0, count($statusArray) - 1)]);
             $mission->setCountry($countries[mt_rand(0, count($countries) - 1)]);
             $mission->setSpeciality($specialities[mt_rand(0, count($specialities) - 1)]);
+            $mission->addHideout($hideouts[mt_rand(0, count($hideouts) - 1)]);
         
             $manager->persist($mission);
             $missions[] = $mission;

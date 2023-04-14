@@ -30,6 +30,8 @@
 						</th>
 						<th scope="col">Specialité
 						</th>
+						<th scope="col">Planque
+						</th>
 						<th scope="col">Début
 						</th>
 						<th scope="col">Fin
@@ -62,6 +64,11 @@
 							</td>
 							<td>
 								{{mission.speciality.name}}
+							</td>
+							<td>
+								{% for hideout in mission.hideout %}
+									{{hideout.code}} <br>
+								{% endfor %}
 							</td>
 							<td>{{mission.startDate | date("d/m/Y")}}</td>
 							<td>{{mission.endDate | date("d/m/Y")}}</td>

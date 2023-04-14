@@ -46,9 +46,13 @@ class Mission
     #[ORM\ManyToOne(inversedBy: 'missions')]
     private ?Speciality $speciality = null;
 
+    #[ORM\ManyToMany(targetEntity: Hideout::class, inversedBy: 'missions')]
+    private Collection $hideout;
+
     public function __construct()
     {
         $this->agent = new ArrayCollection();
+        $this->hideout = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -184,6 +188,30 @@ class Mission
     public function setSpeciality(?Speciality $speciality): self
     {
         $this->speciality = $speciality;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Hideout>
+     */
+    public function getHideout(): Collection
+    {
+        return $this->hideout;
+    }
+
+    public function addHideout(Hideout $hideout): self
+    {
+        if (!$this->hideout->contains($hideout)) {
+            $this->hideout->add($hideout);
+        }
+
+        return $this;
+    }
+
+    public function removeHideout(Hideout $hideout): self
+    {
+        $this->hideout->removeElement($hideout);
 
         return $this;
     }
