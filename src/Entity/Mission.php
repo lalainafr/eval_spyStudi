@@ -43,6 +43,9 @@ class Mission
     #[ORM\ManyToOne(inversedBy: 'missions')]
     private ?Country $country = null;
 
+    #[ORM\ManyToOne(inversedBy: 'missions')]
+    private ?Speciality $speciality = null;
+
     public function __construct()
     {
         $this->agent = new ArrayCollection();
@@ -169,6 +172,18 @@ class Mission
     public function setCountry(?Country $country): self
     {
         $this->country = $country;
+
+        return $this;
+    }
+
+    public function getSpeciality(): ?Speciality
+    {
+        return $this->speciality;
+    }
+
+    public function setSpeciality(?Speciality $speciality): self
+    {
+        $this->speciality = $speciality;
 
         return $this;
     }

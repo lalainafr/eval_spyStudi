@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Agent;
 use App\Entity\Country;
 use App\Entity\Mission;
+use App\Entity\Speciality;
 use App\Entity\Status;
 use App\Entity\Type;
 use Symfony\Component\Form\AbstractType;
@@ -53,6 +54,10 @@ class MissionType extends AbstractType
             ->add('country', EntityType::class, [
                 'class' => Country::class,
                 'label' => 'Pays de la mission'
+            ])
+            ->add('speciality', EntityType::class, [
+                'class' => Speciality::class,
+                'label' => 'Specilaité requise'
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Valider',

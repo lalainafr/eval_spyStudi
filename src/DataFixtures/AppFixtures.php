@@ -97,6 +97,7 @@ class AppFixtures extends Fixture
             $mission->setType($typesArray[mt_rand(0, count($typesArray) - 1)]);
             $mission->setStatus($statusArray[mt_rand(0, count($statusArray) - 1)]);
             $mission->setCountry($countries[mt_rand(0, count($countries) - 1)]);
+            $mission->setSpeciality($specialities[mt_rand(0, count($specialities) - 1)]);
         
             $manager->persist($mission);
             $missions[] = $mission;
