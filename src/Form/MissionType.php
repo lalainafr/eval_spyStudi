@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Agent;
+use App\Entity\Country;
 use App\Entity\Mission;
 use App\Entity\Status;
 use App\Entity\Type;
@@ -48,6 +49,10 @@ class MissionType extends AbstractType
             ->add('status', EntityType::class, [
                 'class' => Status::class,
                 'label' => 'Statut de la mission'
+            ])
+            ->add('country', EntityType::class, [
+                'class' => Country::class,
+                'label' => 'Pays de la mission'
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Valider',

@@ -40,6 +40,9 @@ class Mission
     #[ORM\ManyToOne(inversedBy: 'missions')]
     private ?Status $status = null;
 
+    #[ORM\ManyToOne(inversedBy: 'missions')]
+    private ?Country $country = null;
+
     public function __construct()
     {
         $this->agent = new ArrayCollection();
@@ -154,6 +157,18 @@ class Mission
     public function setStatus(?Status $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getCountry(): ?Country
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?Country $country): self
+    {
+        $this->country = $country;
 
         return $this;
     }

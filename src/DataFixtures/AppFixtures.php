@@ -2,13 +2,14 @@
 
 namespace App\DataFixtures;
 
+use Faker\Factory;
+use App\Entity\Type;
+use Faker\Generator;
 use App\Entity\Agent;
+use App\Entity\Status;
+use App\Entity\Country;
 use App\Entity\Mission;
 use App\Entity\Speciality;
-use App\Entity\Status;
-use App\Entity\Type;
-use Faker\Factory;
-use Faker\Generator;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
@@ -74,6 +75,15 @@ class AppFixtures extends Fixture
             $statusArray[] = $status;
         }
 
+        //COUNTRY
+
+        for ($i=0; $i < 4; $i++) { 
+            $country = new Country();
+            $country->setName($this->faker->country());
+            $manager->persist($country);
+            $countries[] = $country;
+        }
+
         //MISSION
         $missions = [];
         for ($i=0; $i < 5; $i++) { 
@@ -86,6 +96,7 @@ class AppFixtures extends Fixture
             $mission->addAgent($agents[mt_rand(0, count($agents) - 1)]);
             $mission->setType($typesArray[mt_rand(0, count($typesArray) - 1)]);
             $mission->setStatus($statusArray[mt_rand(0, count($statusArray) - 1)]);
+            $mission->setCountry($countries[mt_rand(0, count($countries) - 1)]);
         
             $manager->persist($mission);
             $missions[] = $mission;

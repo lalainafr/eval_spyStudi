@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}- Modifier un PAYS
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<section class="row justify-content-center">
+			<h1 class='text-center text-muted'>MODIFIER UN PAYS</h1>
+			<br>
+			<br>
+			<div class="col-md-4">
+				{{ form_start(form) }}
+				<br>
+				{{ form_row(form.name) }}
+				<br>
+				{{ form_row(form.submit) }}
+				{{ form_end(form) }}
+			</div>
+		</section>
+	</div>
+{% endblock %}

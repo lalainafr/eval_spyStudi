@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}- Liste des PAYS  
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1 class='text-center'>LISTE DES PAYS</h1>
+		<br>
+		<br>		
+		<a href="{{path('app_country_new')}}">Ajouter</a>
+		<section>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Nom du pays
+						</th>
+						<th scope="col">Action
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for country in countries %}
+						<tr>
+							<td>{{country.id}}</td>
+							<td>{{country.name}}</td>
+							<td>
+								<a href="{{path('app_country_edit', {id: country.id})}}">edit</a>
+								&nbsp
+								<a href="{{path('app_country_delete', {id: country.id})}}">delete</a>
+							</td>
+						</tr>
+					</tbody>
+				{% endfor %}
+
+			</tbody>
+		</table>
+	</section>
+</div>{% endblock %}

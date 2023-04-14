@@ -18,13 +18,15 @@
 						</th>
 						<th scope="col">Description
 						</th>
-						<th scope="col">Nom de code
+						<th scope="col">Code
 						</th>
 						<th scope="col">Agent
 						</th>
 						<th scope="col">Type
 						</th>
 						<th scope="col">Statut
+						</th>
+						<th scope="col">Pays
 						</th>
 						<th scope="col">Début
 						</th>
@@ -52,6 +54,9 @@
 							</td>
 							<td>
 								{{mission.status.name}}
+							</td>
+							<td>
+								{{mission.country.name}}
 							</td>
 							<td>{{mission.startDate | date("d/m/Y")}}</td>
 							<td>{{mission.endDate | date("d/m/Y")}}</td>
