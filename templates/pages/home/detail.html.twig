@@ -1,107 +1,133 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Detail de la mission
+{% block title %}
+	Detail de la mission
 {% endblock %}
 
 {% block body %}
-<div class="container">
-	<h1 class='text-center'>DETAIL DE LA MISSION</h1>
-	<br>
-	<section>
-		<div class="row">
-			<div class="col-md-4">
+	<div class="container">
+		<h1 class='text-center'>DETAIL DE LA MISSION</h1>
+		<br>
+		<section>
+			<div class="row">
+				<div class="col-md-4">
 
-				<p><b>NOM DE LA MISSION</b></p>
-				<p>
-					{{mission.title}}
-				</p>
-				<br>
-				<p><b>DESCRIPTION</b></p>
-				<p>
-					{{mission.description}}
-				</p>
-				<br>
-				<p><b>NOM DE CODE</b></p>
-				<p>
-					{{mission.codeName}}
-				</p>
-				<br>
-				<p><b>AGENT</b></p>
-				<p>
-					{% for agent in mission.agent %}
-					{{agent.firstName}}
-					{{agent.lastName}}
-					{% endfor %}
-				</p>
-				
+					<p>
+						<b>NOM DE LA MISSION</b>
+					</p>
+					<p>
+						{{mission.title}}
+					</p>
+					<br>
+					<p>
+						<b>DESCRIPTION</b>
+					</p>
+					<p>
+						{{mission.description}}
+					</p>
+					<br>
+					<p>
+						<b>NOM DE CODE</b>
+					</p>
+					<p>
+						{{mission.codeName}}
+					</p>
+					<br>
+					<p>
+						<b>AGENT</b>
+					</p>
+					<p>
+						{% for agent in mission.agent %}
+							{{agent.firstName}}
+							{{agent.lastName}}
+						{% endfor %}
+					</p>
+
+				</div>
+				<div class="col-md-4">
+
+					<p>
+						<b>TYPE</b>
+					</p>
+					<p>
+						{{mission.type.name}}
+					</p>
+					<br>
+					<p>
+						<b>STATUS</b>
+					</p>
+					<p>
+						{{mission.status.name}}
+					</p>
+					<br>
+					<p>
+						<b>PAYS</b>
+					</p>
+					<p>
+						{{mission.country.name}}
+					</p>
+					<br>
+					<p>
+						<b>SPECIALITE DEMANDEE</b>
+					</p>
+					<p>
+						{{mission.speciality.name}}
+					</p>
+					<br>
+					<p>
+						<b>PLANQUE</b>
+					</p>
+					<p>
+						{% for hideout in mission.hideout %}
+							{{hideout.code}}
+							<br>
+						{% endfor %}
+					</p>
+				</div>
+				<div class="col-md-4">
+
+					<p>
+						<b>CIBLE</b>
+					</p>
+					<p>
+						{% for target in mission.target %}
+							{{target.getFirstName()}}
+							{{target.getLastName()}}
+							<br>
+						{% endfor %}
+					</p>
+					<br>
+					<p>
+						<b>CONTACT</b>
+					</p>
+					<p>
+						{% for contact in mission.contact %}
+							{{contact.getFirstName()}}
+							{{contact.getLastName()}}
+							<br>
+						{% endfor %}
+					</p>
+					<br>
+					<p>
+						<b>DEBUT</b>
+					</p>
+					<p>
+						{{mission.startDate | date("d/m/Y")}}
+					</p>
+					<p>
+						<b>FIN</b>
+					</p>
+					<p>
+						{{mission.endDate | date("d/m/Y")}}
+					</p>
+					<br>
+					<p>
+						<a href="{{path('app_home')}}">retour</a>
+					</p>
+				</div>
 			</div>
-			<div class="col-md-4">
-				
-				<p><b>TYPE</b></p>
-				<p>
-					{{mission.type.name}}
-				</p>
-				<br>
-				<p><b>STATUS</b></p>
-				<p>
-					{{mission.status.name}}
-				</p>
-				<br>
-				<p><b>PAYS</b></p>
-				<p>
-					{{mission.country.name}}
-				</p>
-				<br>
-				<p><b>SPECIALITE DEMANDEE</b></p>
-				<p>
-					{{mission.speciality.name}}
-				</p>
-				<br>
-				<p><b>PLANQUE</b></p>
-				<p>
-					{% for hideout in mission.hideout %}
-					{{hideout.code}} <br>
-					{% endfor %}
-				</p>
-			</div>
-			<div class="col-md-4">
-				
-				<p><b>CIBLE</b></p>
-				<p>
-					{% for target in mission.target %}
-					{{target.getFirstName()}}
-					{{target.getLastName()}} <br>
-					{% endfor %}
-				</p>
-				<br>
-				<p><b>CONTACT</b></p>
-				<p>
-					{% for contact in mission.contact %}
-					{{contact.getFirstName()}}
-					{{contact.getLastName()}} <br>
-					{% endfor %}
-				</p>
-				<br>
-				<p><b>DEBUT</b></p>
-				<p>
-					{{mission.startDate | date("d/m/Y")}}
-				</p>
-				<p><b>FIN</b></p>
-				<p>
-					{{mission.endDate | date("d/m/Y")}}
-				</p>
-			</div>
-		</div>
 
 
-
-
-
-
-
-
-
-
-
-	</section>
-</div>{% endblock %}
+		</section>
+	</div>
+{% endblock %}
