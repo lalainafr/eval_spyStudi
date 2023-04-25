@@ -24,10 +24,14 @@ class Country
     #[ORM\OneToMany(mappedBy: 'nationality', targetEntity: Target::class)]
     private Collection $targets;
 
+    #[ORM\OneToMany(mappedBy: 'nationality', targetEntity: Contact::class)]
+    private Collection $contacts;
+
     public function __construct()
     {
         $this->missions = new ArrayCollection();
         $this->targets = new ArrayCollection();
+        $this->contacts = new ArrayCollection();
     }
 
     public function __toString()
@@ -105,6 +109,36 @@ class Country
             // set the owning side to null (unless already changed)
             if ($target->getNationality() === $this) {
                 $target->setNationality(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Contact>
+     */
+    public function getContacts(): Collection
+    {
+        return $this->contacts;
+    }
+
+    public function addContact(Contact $contact): self
+    {
+        if (!$this->contacts->contains($contact)) {
+            $this->contacts->add($contact);
+            $contact->setNationality($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContact(Contact $contact): self
+    {
+        if ($this->contacts->removeElement($contact)) {
+            // set the owning side to null (unless already changed)
+            if ($contact->getNationality() === $this) {
+                $contact->setNationality(null);
             }
         }
 

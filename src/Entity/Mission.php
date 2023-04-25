@@ -52,11 +52,15 @@ class Mission
     #[ORM\ManyToMany(targetEntity: Target::class, inversedBy: 'missions')]
     private Collection $target;
 
+    #[ORM\ManyToMany(targetEntity: Contact::class, inversedBy: 'missions')]
+    private Collection $contact;
+
     public function __construct()
     {
         $this->agent = new ArrayCollection();
         $this->hideout = new ArrayCollection();
         $this->target = new ArrayCollection();
+        $this->contact = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -240,6 +244,30 @@ class Mission
     public function removeTarget(Target $target): self
     {
         $this->target->removeElement($target);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Contact>
+     */
+    public function getContact(): Collection
+    {
+        return $this->contact;
+    }
+
+    public function addContact(Contact $contact): self
+    {
+        if (!$this->contact->contains($contact)) {
+            $this->contact->add($contact);
+        }
+
+        return $this;
+    }
+
+    public function removeContact(Contact $contact): self
+    {
+        $this->contact->removeElement($contact);
 
         return $this;
     }

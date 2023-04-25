@@ -34,6 +34,8 @@
 						</th>
 						<th scope="col">Cible
 						</th>
+						<th scope="col">Contact
+						</th>
 						<th scope="col">Début
 						</th>
 						<th scope="col">Fin
@@ -74,6 +76,12 @@
 							</td>
 							<td>
 								{% for target in mission.target %}
+									{{target.getFirstName()}} 
+									{{target.getLastName()}} <br>
+								{% endfor %}
+							</td>
+							<td>
+								{% for contact in mission.contact %}
 									{{target.getFirstName()}} 
 									{{target.getLastName()}} <br>
 								{% endfor %}

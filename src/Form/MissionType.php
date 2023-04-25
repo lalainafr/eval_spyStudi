@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Agent;
+use App\Entity\Contact;
 use App\Entity\Country;
 use App\Entity\Hideout;
 use App\Entity\Mission;
@@ -77,6 +78,12 @@ class MissionType extends AbstractType
                 'expanded' => true,
                 'multiple' => true,
                 'label' => 'Cible'
+            ])
+            ->add('contact', EntityType::class, [
+                'class' => Contact::class,
+                'expanded' => true,
+                'multiple' => true,
+                'label' => 'Contact'
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Valider',

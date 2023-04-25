@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}- Liste des CONTACTS
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1 class='text-center'>LISTE DES CONTACTS</h1>
+		<br>
+		<br>
+		<a href="{{path('app_contact_new')}}">Ajouter</a>
+		<section>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Prenom
+						</th>
+						<th scope="col">Nom
+						</th>
+						<th scope="col">Date d'anniversaire
+						</th>
+						<th scope="col">Nom de Code
+						</th>
+						<th scope="col">Nationalité
+						</th>
+						<th scope="col">Action
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for contact in contacts %}
+						<tr>
+							<td>{{contact.id}}</td>
+							<td>{{contact.firstName}}</td>
+							<td>{{contact.lastName}}</td>
+							<td>{{contact.birthDate | date('d/m/Y')}}</td>
+							<td>{{contact.codeName}}</td>
+							<td>{{contact.nationality}}</td>
+							<td>
+								<a href="{{path('app_contact_edit', {id: contact.id})}}">edit</a>
+								&nbsp
+								<a href="{{path('app_contact_delete', {id: contact.id})}}">delete</a>
+							</td>
+						</tr>
+					</tbody>
+				{% endfor %}
+
+			</tbody>
+		</table>
+	</section>
+</div>{% endblock %}

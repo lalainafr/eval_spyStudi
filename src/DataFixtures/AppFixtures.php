@@ -6,6 +6,7 @@ use Faker\Factory;
 use App\Entity\Type;
 use Faker\Generator;
 use App\Entity\Agent;
+use App\Entity\Contact;
 use App\Entity\Status;
 use App\Entity\Country;
 use App\Entity\Hideout;
@@ -107,6 +108,18 @@ class AppFixtures extends Fixture
             $targets[] = $target;
         }
 
+        //CONTACT
+        for ($i = 0; $i < 4; $i++) {
+            $contact = new Contact();
+            $contact->setFirstName($this->faker->firstName());
+            $contact->setLastName($this->faker->lastName());
+            $contact->setBirthDate($this->faker->dateTimeBetween('-40 years', '-20years'));
+            $contact->setCodeName('CTC - ' . $this->faker->text(8));
+            $contact->setNationality($countries[mt_rand(0, count($countries) - 1)]);
+            $manager->persist($contact);
+            $contacts[] = $contact;
+        }
+
         //MISSION
         $missions = [];
         for ($i = 0; $i < 5; $i++) {
@@ -122,7 +135,8 @@ class AppFixtures extends Fixture
             $mission->setCountry($countries[mt_rand(0, count($countries) - 1)]);
             $mission->setSpeciality($specialities[mt_rand(0, count($specialities) - 1)]);
             $mission->addHideout($hideouts[mt_rand(0, count($hideouts) - 1)]);
-            $mission->addTarget($targets[mt_rand(0, count($targets) - 1)]);
+            // $mission->addTarget($targets[mt_rand(0, count($targets) - 1)]);
+            // $mission->addContact($contacts[mt_rand(0, count($contacts) - 1)]);
 
             $manager->persist($mission);
             $missions[] = $mission;
