@@ -1,0 +1,21 @@
+<br>
+<br>
+<br>
+<br>
+
+<h5>FILTRE</h5>
+{# rajouter un id pour le cibler en JS #}
+{{ form_start(form, {'attr': {'id':'filters'}})}}
+
+{{ form_row(form.q)}}
+
+<br>
+<h5>PAYS</h5>
+{{ form_row(form.country)}}
+<br>
+<h5>TYPE</h5>
+{{ form_row(form.type)}}
+<br>
+
+
+{{form_end(form)}}

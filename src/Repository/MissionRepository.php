@@ -2,9 +2,11 @@
 
 namespace App\Repository;
 
+use App\Data\Search;
 use App\Entity\Mission;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Mission>
@@ -38,6 +40,50 @@ class MissionRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    /**
+     * Récupére les missions en lien avec la recherche
+     * @return Mission[] 
+     */
+
+    public function findSearch(Search $search)
+    {
+        $query = $this
+            ->createQueryBuilder('m')
+            ->select('t', 'm')
+            ->join('m.type', 't')
+
+            ->select('c', 'm')
+            ->join('m.country', 'c');
+
+        if (!empty($search->q)) {
+            $query = $query
+                ->andWhere('m.title LIKE :q')
+                ->setParameter('q', "%{$search->q}%");
+        }
+
+        if (!empty($search->country)) { {
+                $query = $query
+                    ->andWhere('c.id IN (:country)')
+                    ->setParameter('country', $search->country);
+            }
+        }
+
+        if (!empty($search->type)) { {
+                $query = $query
+                    ->andWhere('t.id IN (:type)')
+                    ->setParameter('type', $search->type);
+            }
+        }
+        return $query->getQuery();
+        // $query = $query->getQuery();
+        // return $this->paginator->paginate(
+        //     $query,
+        //     $search->page,
+        //     3
+        // );
+    }
+
 
 //    /**
 //     * @return Mission[] Returns an array of Mission objects

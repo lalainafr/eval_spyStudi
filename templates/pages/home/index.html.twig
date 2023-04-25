@@ -5,55 +5,16 @@
 
 {% block body %}
 	<div class="container">
-		<h1 class='text-center'>VOIR LES MISSIONS</h1>
-		<br>
-		<br>
-		<section>
-			<table class="table">
-				<thead>
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col">Titre
-						</th>
-						<th scope="col">Description
-						</th>
-						<th scope="col">Type
-						</th>
-						<th scope="col">Pays
-						</th>
-						<th scope="col">Début
-						</th>
-						<th scope="col">Fin
-						</th>
-						<th scope="col">Detail
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for mission in missions %}
-						<tr>
-							<td>{{mission.id}}</td>
-							<td>{{mission.title}}</td>
-							<td>{{mission.description}}</td>
-							<td>
-								{{mission.type.name}}
-							</td>
-							<td>
-								{{mission.country.name}}
-							</td>
-							<td>{{mission.startDate | date("d/m/Y")}}</td>
-							<td>{{mission.endDate | date("d/m/Y")}}</td>
-							<td>
-								<a href="{{path('app_home_detail', {id: mission.id})}}">Voir</a>
-							</td>
-						</tr>
-					</tbody>
-				{% endfor %}
-
-			</tbody>
-		</table>
-	</section>
-	<div class="navigation">
-		{{ knp_pagination_render(missions,'@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig')}}
+		<div class="row">
+			<div class="col-md-2">
+				{% include "pages/home/_filter.html.twig" %}
+			</div>
+			<div class="col-md-10" id="content">
+				{% include "pages/home/_content.html.twig" %}
+			</div>
+		</div>
 	</div>
-</div>{% endblock %}
+{% endblock %}
+{% block javascripts %}
+	<script src="{{ asset('assets/js/filters.js')}}"></script>
+{% endblock %}
