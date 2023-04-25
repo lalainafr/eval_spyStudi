@@ -11,6 +11,7 @@ use App\Entity\Country;
 use App\Entity\Hideout;
 use App\Entity\Mission;
 use App\Entity\Speciality;
+use App\Entity\Target;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
@@ -36,22 +37,22 @@ class AppFixtures extends Fixture
 
         //SPECIALITE
         $specialities = [];
-        for ($i=0; $i < 5; $i++) { 
+        for ($i = 0; $i < 5; $i++) {
             $speciality = new Speciality();
-            $speciality->setName('SPE - '. $this->faker->word(8));
+            $speciality->setName('SPE - ' . $this->faker->word(8));
             $manager->persist($speciality);
             $specialities[] =  $speciality;
         }
 
         //AGENT
         $agents = [];
-        for ($i=0; $i < 5; $i++) { 
-            $agent= new Agent();
+        for ($i = 0; $i < 5; $i++) {
+            $agent = new Agent();
             $agent->setfirstName($this->faker->firstName());
             $agent->setlastName($this->faker->lastName());
             $agent->setBirthDate($this->faker->dateTimeBetween('- 30 year', '- 20 year'));
             $agent->setIdCode($this->faker->text(8));
-            for ($j=0; $j < mt_rand(1,3); $j++) { 
+            for ($j = 0; $j < mt_rand(1, 3); $j++) {
                 $agent->addSpeciality($specialities[mt_rand(0, count($specialities) - 1)]);
             }
             $manager->persist($agent);
@@ -60,7 +61,7 @@ class AppFixtures extends Fixture
 
         //TYPE
         $types =  ['Infiltration', 'Surveillance', 'Assassinat'];
-        for ($i=0; $i < 3; $i++) { 
+        for ($i = 0; $i < 3; $i++) {
             $type = new Type();
             $type->setName($types[$i]);
             $manager->persist($type);
@@ -69,7 +70,7 @@ class AppFixtures extends Fixture
 
         //STATUT
         $statuses =  ['En preparation', 'En cours', 'Terminé', 'Echec'];
-        for ($i=0; $i < 4; $i++) { 
+        for ($i = 0; $i < 4; $i++) {
             $status = new Status();
             $status->setName($statuses[$i]);
             $manager->persist($status);
@@ -77,7 +78,7 @@ class AppFixtures extends Fixture
         }
 
         //COUNTRY
-        for ($i=0; $i < 4; $i++) { 
+        for ($i = 0; $i < 4; $i++) {
             $country = new Country();
             $country->setName($this->faker->country());
             $manager->persist($country);
@@ -85,19 +86,31 @@ class AppFixtures extends Fixture
         }
 
         //PLANQUE
-        for ($i=0; $i < 4; $i++) { 
+        for ($i = 0; $i < 4; $i++) {
             $hideout = new Hideout();
-            $hideout->setCode('PLQ - '. $this->faker->text(8));
+            $hideout->setCode('PLQ - ' . $this->faker->text(8));
             $hideout->setAddress($this->faker->address());
-            $hideout->setType('PLTYPE - '. $this->faker->text(8));
+            $hideout->setType('PLTYPE - ' . $this->faker->text(8));
             $manager->persist($hideout);
             $hideouts[] = $hideout;
         }
 
+        //CIBLE
+        for ($i = 0; $i < 4; $i++) {
+            $target = new Target();
+            $target->setFirstName($this->faker->firstName());
+            $target->setLastName($this->faker->lastName());
+            $target->setBirthDate($this->faker->dateTimeBetween('-40 years', '-20years'));
+            $target->setCodeName('CIB - ' . $this->faker->text(8));
+            $target->setNationality($countries[mt_rand(0, count($countries) - 1)]);
+            $manager->persist($target);
+            $targets[] = $target;
+        }
+
         //MISSION
         $missions = [];
-        for ($i=0; $i < 5; $i++) { 
-            $mission= new Mission();
+        for ($i = 0; $i < 5; $i++) {
+            $mission = new Mission();
             $mission->setTitle('MIS - ' . $this->faker->word(10));
             $mission->setDescription($this->faker->text(100));
             $mission->setCodeName('COD - ' . $this->faker->word(8));
@@ -109,7 +122,8 @@ class AppFixtures extends Fixture
             $mission->setCountry($countries[mt_rand(0, count($countries) - 1)]);
             $mission->setSpeciality($specialities[mt_rand(0, count($specialities) - 1)]);
             $mission->addHideout($hideouts[mt_rand(0, count($hideouts) - 1)]);
-        
+            $mission->addTarget($targets[mt_rand(0, count($targets) - 1)]);
+
             $manager->persist($mission);
             $missions[] = $mission;
         }

@@ -8,6 +8,7 @@ use App\Entity\Hideout;
 use App\Entity\Mission;
 use App\Entity\Speciality;
 use App\Entity\Status;
+use App\Entity\Target;
 use App\Entity\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -70,6 +71,12 @@ class MissionType extends AbstractType
                 'expanded' => true,
                 'multiple' => true,
                 'label' => 'Planque'
+            ])
+            ->add('target', EntityType::class, [
+                'class' => Target::class,
+                'expanded' => true,
+                'multiple' => true,
+                'label' => 'Cible'
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Valider',

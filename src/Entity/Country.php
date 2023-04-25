@@ -21,9 +21,13 @@ class Country
     #[ORM\OneToMany(mappedBy: 'country', targetEntity: Mission::class)]
     private Collection $missions;
 
+    #[ORM\OneToMany(mappedBy: 'nationality', targetEntity: Target::class)]
+    private Collection $targets;
+
     public function __construct()
     {
         $this->missions = new ArrayCollection();
+        $this->targets = new ArrayCollection();
     }
 
     public function __toString()
@@ -71,6 +75,36 @@ class Country
             // set the owning side to null (unless already changed)
             if ($mission->getCountry() === $this) {
                 $mission->setCountry(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Target>
+     */
+    public function getTargets(): Collection
+    {
+        return $this->targets;
+    }
+
+    public function addTarget(Target $target): self
+    {
+        if (!$this->targets->contains($target)) {
+            $this->targets->add($target);
+            $target->setNationality($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTarget(Target $target): self
+    {
+        if ($this->targets->removeElement($target)) {
+            // set the owning side to null (unless already changed)
+            if ($target->getNationality() === $this) {
+                $target->setNationality(null);
             }
         }
 

@@ -32,6 +32,8 @@
 						</th>
 						<th scope="col">Planque
 						</th>
+						<th scope="col">Cible
+						</th>
 						<th scope="col">Début
 						</th>
 						<th scope="col">Fin
@@ -68,6 +70,12 @@
 							<td>
 								{% for hideout in mission.hideout %}
 									{{hideout.code}} <br>
+								{% endfor %}
+							</td>
+							<td>
+								{% for target in mission.target %}
+									{{target.getFirstName()}} 
+									{{target.getLastName()}} <br>
 								{% endfor %}
 							</td>
 							<td>{{mission.startDate | date("d/m/Y")}}</td>

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}- Liste des CIBLE
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1 class='text-center'>LISTE DES CIBLES</h1>
+		<br>
+		<br>
+		<a href="{{path('app_target_new')}}">Ajouter</a>
+		<section>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Prenom
+						</th>
+						<th scope="col">Nom
+						</th>
+						<th scope="col">Date d'anniversaire
+						</th>
+						<th scope="col">Nom de Code
+						</th>
+						<th scope="col">Nationalité
+						</th>
+						<th scope="col">Action
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for target in targets %}
+						<tr>
+							<td>{{target.id}}</td>
+							<td>{{target.firstName}}</td>
+							<td>{{target.lastName}}</td>
+							<td>{{target.birthDate | date('d/m/Y')}}</td>
+							<td>{{target.codeName}}</td>
+							<td>
+								{% for nationality in target.nationality %}
+									{{nationality.name}}
+									<br>
+								{% endfor %}
+							</td>
+							<td>
+								<a href="{{path('app_target_edit', {id: target.id})}}">edit</a>
+								&nbsp
+								<a href="{{path('app_target_delete', {id: target.id})}}">delete</a>
+							</td>
+						</tr>
+					</tbody>
+				{% endfor %}
+
+			</tbody>
+		</table>
+	</section>
+</div>{% endblock %}
