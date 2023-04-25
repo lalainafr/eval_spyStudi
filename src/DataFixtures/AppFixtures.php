@@ -36,6 +36,15 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
 
+
+        //COUNTRY
+        for ($i = 0; $i < 4; $i++) {
+            $country = new Country();
+            $country->setName($this->faker->country());
+            $manager->persist($country);
+            $countries[] = $country;
+        }
+
         //SPECIALITE
         $specialities = [];
         for ($i = 0; $i < 5; $i++) {
@@ -56,6 +65,7 @@ class AppFixtures extends Fixture
             for ($j = 0; $j < mt_rand(1, 3); $j++) {
                 $agent->addSpeciality($specialities[mt_rand(0, count($specialities) - 1)]);
             }
+            $agent->setNationality($countries[mt_rand(0, count($countries) - 1)]);
             $manager->persist($agent);
             $agents[] = $agent;
         }
@@ -78,13 +88,6 @@ class AppFixtures extends Fixture
             $statusArray[] = $status;
         }
 
-        //COUNTRY
-        for ($i = 0; $i < 4; $i++) {
-            $country = new Country();
-            $country->setName($this->faker->country());
-            $manager->persist($country);
-            $countries[] = $country;
-        }
 
         //PLANQUE
         for ($i = 0; $i < 4; $i++) {
@@ -92,6 +95,7 @@ class AppFixtures extends Fixture
             $hideout->setCode('PLQ - ' . $this->faker->text(8));
             $hideout->setAddress($this->faker->address());
             $hideout->setType('PLTYPE - ' . $this->faker->text(8));
+            $hideout->setCountry($countries[mt_rand(0, count($countries) - 1)]);
             $manager->persist($hideout);
             $hideouts[] = $hideout;
         }
@@ -135,8 +139,8 @@ class AppFixtures extends Fixture
             $mission->setCountry($countries[mt_rand(0, count($countries) - 1)]);
             $mission->setSpeciality($specialities[mt_rand(0, count($specialities) - 1)]);
             $mission->addHideout($hideouts[mt_rand(0, count($hideouts) - 1)]);
-            // $mission->addTarget($targets[mt_rand(0, count($targets) - 1)]);
-            // $mission->addContact($contacts[mt_rand(0, count($contacts) - 1)]);
+            $mission->addTarget($targets[mt_rand(0, count($targets) - 1)]);
+            $mission->addContact($contacts[mt_rand(0, count($contacts) - 1)]);
 
             $manager->persist($mission);
             $missions[] = $mission;

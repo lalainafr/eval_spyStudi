@@ -27,11 +27,19 @@ class Country
     #[ORM\OneToMany(mappedBy: 'nationality', targetEntity: Contact::class)]
     private Collection $contacts;
 
+    #[ORM\OneToMany(mappedBy: 'nationality', targetEntity: Agent::class)]
+    private Collection $agents;
+
+    #[ORM\OneToMany(mappedBy: 'country', targetEntity: Hideout::class)]
+    private Collection $hideouts;
+
     public function __construct()
     {
         $this->missions = new ArrayCollection();
         $this->targets = new ArrayCollection();
         $this->contacts = new ArrayCollection();
+        $this->agents = new ArrayCollection();
+        $this->hideouts = new ArrayCollection();
     }
 
     public function __toString()
@@ -139,6 +147,66 @@ class Country
             // set the owning side to null (unless already changed)
             if ($contact->getNationality() === $this) {
                 $contact->setNationality(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Agent>
+     */
+    public function getAgents(): Collection
+    {
+        return $this->agents;
+    }
+
+    public function addAgent(Agent $agent): self
+    {
+        if (!$this->agents->contains($agent)) {
+            $this->agents->add($agent);
+            $agent->setNationality($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAgent(Agent $agent): self
+    {
+        if ($this->agents->removeElement($agent)) {
+            // set the owning side to null (unless already changed)
+            if ($agent->getNationality() === $this) {
+                $agent->setNationality(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Hideout>
+     */
+    public function getHideouts(): Collection
+    {
+        return $this->hideouts;
+    }
+
+    public function addHideout(Hideout $hideout): self
+    {
+        if (!$this->hideouts->contains($hideout)) {
+            $this->hideouts->add($hideout);
+            $hideout->setCountry($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHideout(Hideout $hideout): self
+    {
+        if ($this->hideouts->removeElement($hideout)) {
+            // set the owning side to null (unless already changed)
+            if ($hideout->getCountry() === $this) {
+                $hideout->setCountry(null);
             }
         }
 

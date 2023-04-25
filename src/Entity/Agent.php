@@ -34,6 +34,9 @@ class Agent
     #[ORM\ManyToMany(targetEntity: Mission::class, mappedBy: 'agent')]
     private Collection $missions;
 
+    #[ORM\ManyToOne(inversedBy: 'agents')]
+    private ?Country $nationality = null;
+
     public function __construct()
     {
         $this->speciality = new ArrayCollection();
@@ -145,6 +148,18 @@ class Agent
         if ($this->missions->removeElement($mission)) {
             $mission->removeAgent($this);
         }
+
+        return $this;
+    }
+
+    public function getNationality(): ?Country
+    {
+        return $this->nationality;
+    }
+
+    public function setNationality(?Country $nationality): self
+    {
+        $this->nationality = $nationality;
 
         return $this;
     }

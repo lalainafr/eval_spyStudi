@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Agent;
+use App\Entity\Country;
 use App\Entity\Speciality;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -35,6 +36,10 @@ class AgentType extends AbstractType
                 'expanded' => true,
                 'multiple' => true,
                 'label' => 'Specialité'
+            ])
+            ->add('nationality', EntityType::class, [
+                'class' => Country::class,
+                'label' => 'Pays'
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Valider',

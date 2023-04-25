@@ -82,8 +82,8 @@
 							</td>
 							<td>
 								{% for contact in mission.contact %}
-									{{target.getFirstName()}} 
-									{{target.getLastName()}} <br>
+									{{contact.getFirstName()}} 
+									{{contact.getLastName()}} <br>
 								{% endfor %}
 							</td>
 							<td>{{mission.startDate | date("d/m/Y")}}</td>

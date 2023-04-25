@@ -24,6 +24,8 @@
 						</th>
 						<th scope="col">Specialité
 						</th>
+						<th scope="col">Nationalité
+						</th>
 						<th scope="col">Action
 						</th>
 					</tr>
@@ -42,6 +44,7 @@
 									<br>
 								{% endfor %}
 							</td>
+							<td>{{agent.nationality}}</td>
 							<td>
 								<a href="{{path('app_agent_edit', {id: agent.id})}}">edit</a>
 								&nbsp

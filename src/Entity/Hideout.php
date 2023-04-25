@@ -27,6 +27,9 @@ class Hideout
     #[ORM\ManyToMany(targetEntity: Mission::class, mappedBy: 'hideout')]
     private Collection $missions;
 
+    #[ORM\ManyToOne(inversedBy: 'hideouts')]
+    private ?Country $country = null;
+
     public function __construct()
     {
         $this->missions = new ArrayCollection();
@@ -100,6 +103,18 @@ class Hideout
         if ($this->missions->removeElement($mission)) {
             $mission->removeHideout($this);
         }
+
+        return $this;
+    }
+
+    public function getCountry(): ?Country
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?Country $country): self
+    {
+        $this->country = $country;
 
         return $this;
     }
