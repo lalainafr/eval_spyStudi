@@ -126,7 +126,7 @@ class AppFixtures extends Fixture
 
         //MISSION
         $missions = [];
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 30; $i++) {
             $mission = new Mission();
             $mission->setTitle('MIS - ' . $this->faker->word(10));
             $mission->setDescription($this->faker->text(100));

@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MissionController extends AbstractController
 {
+   
     #[Route('/mission/list', name: 'app_mission_list')]
     public function list(MissionRepository $missionRepository): Response
     {

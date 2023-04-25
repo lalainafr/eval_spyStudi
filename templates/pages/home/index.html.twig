@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}- Page d'accueil
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1 class='text-center'>VOIR LES MISSIONS</h1>
+		<br>
+		<br>
+		<section>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Titre
+						</th>
+						<th scope="col">Description
+						</th>
+						<th scope="col">Type
+						</th>
+						<th scope="col">Pays
+						</th>
+						<th scope="col">Début
+						</th>
+						<th scope="col">Fin
+						</th>
+						<th scope="col">Detail
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for mission in missions %}
+						<tr>
+							<td>{{mission.id}}</td>
+							<td>{{mission.title}}</td>
+							<td>{{mission.description}}</td>
+							<td>
+								{{mission.type.name}}
+							</td>
+							<td>
+								{{mission.country.name}}
+							</td>
+							<td>{{mission.startDate | date("d/m/Y")}}</td>
+							<td>{{mission.endDate | date("d/m/Y")}}</td>
+							<td>
+								<a href="{{path('app_home_detail', {id: mission.id})}}">Voir</a>
+							</td>
+						</tr>
+					</tbody>
+				{% endfor %}
+
+			</tbody>
+		</table>
+	</section>
+</div>{% endblock %}
