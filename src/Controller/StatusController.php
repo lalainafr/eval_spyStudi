@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class StatusController extends AbstractController
 {
-    #[Route('/status/new', name: 'app_status_new')]
+    #[Route('admin/status/new', name: 'app_status_new')]
     public function new(EntityManagerInterface $em, Request $request): Response
     {
         $status = new Status();
@@ -28,7 +28,7 @@ class StatusController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-    #[Route('/status/list', name: 'app_status_list')]
+    #[Route('admin/status/list', name: 'app_status_list')]
     public function list(StatusRepository $statusRepository): Response
     {
         $statuses = $statusRepository->findAll();
@@ -37,7 +37,7 @@ class StatusController extends AbstractController
         ]);
     }
 
-    #[Route('/status/edit/{id}', name: 'app_status_edit')]
+    #[Route('admin/status/edit/{id}', name: 'app_status_edit')]
     public function edit($id, StatusRepository $statusRepository, EntityManagerInterface $em, Request $request): Response
     {
         $type = $statusRepository->findOneBy(['id'=> $id]);
@@ -52,7 +52,7 @@ class StatusController extends AbstractController
         ]);
     }
     
-    #[Route('/status/delete/{id}', name: 'app_status_delete')]
+    #[Route('admin/status/delete/{id}', name: 'app_status_delete')]
     public function delete($id, StatusRepository $statusRepository, EntityManagerInterface $em): Response
     {
         $status = $statusRepository->findOneBy(['id'=> $id]);

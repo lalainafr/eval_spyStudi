@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class TypeController extends AbstractController
 {
-    #[Route('/type/new', name: 'app_type_new')]
+    #[Route('admin/type/new', name: 'app_type_new')]
     public function new(EntityManagerInterface $em, Request $request): Response
     {
         $type = new Type();
@@ -28,7 +28,7 @@ class TypeController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-    #[Route('/type/list', name: 'app_type_list')]
+    #[Route('admin/type/list', name: 'app_type_list')]
     public function list(TypeRepository $typeRepository): Response
     {
         $types = $typeRepository->findAll();
@@ -37,7 +37,7 @@ class TypeController extends AbstractController
         ]);
     }
 
-    #[Route('/type/edit/{id}', name: 'app_type_edit')]
+    #[Route('admin/type/edit/{id}', name: 'app_type_edit')]
     public function edit($id, TypeRepository $typeRepository, EntityManagerInterface $em, Request $request): Response
     {
         $type = $typeRepository->findOneBy(['id'=> $id]);
@@ -52,7 +52,7 @@ class TypeController extends AbstractController
         ]);
     }
 
-    #[Route('/type/delete/{id}', name: 'app_type_delete')]
+    #[Route('admin/type/delete/{id}', name: 'app_type_delete')]
     public function delete($id, TypeRepository $typeRepository, EntityManagerInterface $em): Response
     {
         $type = $typeRepository->findOneBy(['id'=> $id]);

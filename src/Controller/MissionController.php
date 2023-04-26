@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class MissionController extends AbstractController
 {
    
-    #[Route('/mission/list', name: 'app_mission_list')]
+    #[Route('admin/mission/list', name: 'app_mission_list')]
     public function list(MissionRepository $missionRepository): Response
     {
         $missions =  $missionRepository->findAll();
@@ -23,7 +23,7 @@ class MissionController extends AbstractController
         ]);
     }
 
-    #[Route('/mission/new', name: 'app_mission_new')]
+    #[Route('admin/mission/new', name: 'app_mission_new')]
     public function new(Request $request, EntityManagerInterface $em): Response
     {
         $mission =  new Mission();
@@ -40,7 +40,7 @@ class MissionController extends AbstractController
         ]);
     }
     
-    #[Route('/mission/edit/{id}', name: 'app_mission_edit')]
+    #[Route('admin/mission/edit/{id}', name: 'app_mission_edit')]
     public function edit($id, Request $request, EntityManagerInterface $em, MissionRepository $missionRepository): Response
     {
         $mission =  $missionRepository->findOneBy(['id' => $id]);
@@ -56,7 +56,7 @@ class MissionController extends AbstractController
         ]);
     }
 
-    #[Route('/mission/delete/{id}', name: 'app_mission_delete')]
+    #[Route('admin/mission/delete/{id}', name: 'app_mission_delete')]
     public function remove($id, EntityManagerInterface $em, MissionRepository $missionRepository): Response
     {
         $mission =  $missionRepository->findOneBy(['id' => $id]);

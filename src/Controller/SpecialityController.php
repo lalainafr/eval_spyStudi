@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SpecialityController extends AbstractController
 {
-    #[Route('/speciality/list', name: 'app_speciality_list')]
+    #[Route('admin/speciality/list', name: 'app_speciality_list')]
     public function list(SpecialityRepository $specialityRepository): Response
     {
         $specialities =  $specialityRepository->findAll();
@@ -22,7 +22,7 @@ class SpecialityController extends AbstractController
         ]);
     }
 
-    #[Route('/speciality/new', name: 'app_speciality_new')]
+    #[Route('admin/speciality/new', name: 'app_speciality_new')]
     public function new(Request $request, EntityManagerInterface $em): Response
     {
         $speciality =  new Speciality();
@@ -39,7 +39,7 @@ class SpecialityController extends AbstractController
         ]);
     }
 
-    #[Route('/speciality/edit/{id}', name: 'app_speciality_edit')]
+    #[Route('admin/speciality/edit/{id}', name: 'app_speciality_edit')]
     public function edit($id, SpecialityRepository $specialityRepository, Request $request, EntityManagerInterface $em): Response
     {
         $speciality =  $specialityRepository->findOneBy(['id' => $id]);
@@ -54,7 +54,7 @@ class SpecialityController extends AbstractController
         ]);
     }
 
-    #[Route('/speciality/delete/{id}', name: 'app_speciality_delete')]
+    #[Route('admin/speciality/delete/{id}', name: 'app_speciality_delete')]
     public function delete($id, SpecialityRepository $specialityRepository, Request $request, EntityManagerInterface $em): Response
     {
         $speciality =  $specialityRepository->findOneBy(['id' => $id]);

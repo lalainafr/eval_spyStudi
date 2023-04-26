@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ContactController extends AbstractController
 {
-    #[Route('/contact/new', name: 'app_contact_new')]
+    #[Route('admin/contact/new', name: 'app_contact_new')]
     public function new(EntityManagerInterface $em, Request $request): Response
     {
         $contact = new Contact();
@@ -28,7 +28,7 @@ class ContactController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-    #[Route('/contact/list', name: 'app_contact_list')]
+    #[Route('admin/contact/list', name: 'app_contact_list')]
     public function list(ContactRepository $contactRepository): Response
     {
         $contacts = $contactRepository->findAll();
@@ -37,7 +37,7 @@ class ContactController extends AbstractController
         ]);
     }
 
-    #[Route('/contact/edit/{id}', name: 'app_contact_edit')]
+    #[Route('admin/contact/edit/{id}', name: 'app_contact_edit')]
     public function edit($id, ContactRepository $contactRepository, EntityManagerInterface $em, Request $request): Response
     {
         $contact = $contactRepository->findOneBy(['id'=> $id]);
@@ -52,7 +52,7 @@ class ContactController extends AbstractController
         ]);
     }
     
-    #[Route('/contact/delete/{id}', name: 'app_contact_delete')]
+    #[Route('admin/contact/delete/{id}', name: 'app_contact_delete')]
     public function delete($id, ContactRepository $contactRepository, EntityManagerInterface $em): Response
     {
         $contact = $contactRepository->findOneBy(['id'=> $id]);

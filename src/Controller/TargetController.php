@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TargetController extends AbstractController
 {
-    #[Route('/target/new', name: 'app_target_new')]
+    #[Route('admin/target/new', name: 'app_target_new')]
     public function new(EntityManagerInterface $em, Request $request): Response
     {
         $target = new Target();
@@ -28,7 +28,7 @@ class TargetController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-    #[Route('/target/list', name: 'app_target_list')]
+    #[Route('admin/target/list', name: 'app_target_list')]
     public function list(TargetRepository $targetRepository): Response
     {
         $targets = $targetRepository->findAll();
@@ -37,7 +37,7 @@ class TargetController extends AbstractController
         ]);
     }
 
-    #[Route('/target/edit/{id}', name: 'app_target_edit')]
+    #[Route('admin/target/edit/{id}', name: 'app_target_edit')]
     public function edit($id, TargetRepository $targetRepository, EntityManagerInterface $em, Request $request): Response
     {
         $target = $targetRepository->findOneBy(['id'=> $id]);
@@ -52,7 +52,7 @@ class TargetController extends AbstractController
         ]);
     }
     
-    #[Route('/target/delete/{id}', name: 'app_target_delete')]
+    #[Route('admin/target/delete/{id}', name: 'app_target_delete')]
     public function delete($id, TargetRepository $targetRepository, EntityManagerInterface $em): Response
     {
         $target = $targetRepository->findOneBy(['id'=> $id]);

@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AgentController extends AbstractController
 {
-    #[Route('/agent/list', name: 'app_agent_list')]
+    #[Route('admin/agent/list', name: 'app_agent_list')]
     public function list(AgentRepository $agentRepository): Response
     {
         $agents =  $agentRepository->findAll();
@@ -22,7 +22,7 @@ class AgentController extends AbstractController
         ]);
     }
 
-    #[Route('/agent/new', name: 'app_agent_new')]
+    #[Route('admin/agent/new', name: 'app_agent_new')]
     public function new(Request $request, EntityManagerInterface $em): Response
     {
         $agent =  new Agent();
@@ -39,7 +39,7 @@ class AgentController extends AbstractController
         ]);
     }
 
-    #[Route('/agent/edit/{id}', name: 'app_agent_edit')]
+    #[Route('admin/agent/edit/{id}', name: 'app_agent_edit')]
     public function edit($id, AgentRepository $agentRepository, EntityManagerInterface $em, Request $request): Response
     {
         $agent = $agentRepository->findOneBy(['id' => $id]);
@@ -55,7 +55,7 @@ class AgentController extends AbstractController
         ]);
     }
 
-    #[Route('/agent/delete/{id}', name: 'app_agent_delete')]
+    #[Route('admin/agent/delete/{id}', name: 'app_agent_delete')]
     public function delete($id, AgentRepository $agentRepository, EntityManagerInterface $em, Request $request): Response
     {
         $agent = $agentRepository->findOneBy(['id' => $id]);

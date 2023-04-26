@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CountryController extends AbstractController
 {
-    #[Route('/country/new', name: 'app_country_new')]
+    #[Route('admin/country/new', name: 'app_country_new')]
     public function new(EntityManagerInterface $em, Request $request): Response
     {
         $country = new Country();
@@ -28,7 +28,7 @@ class CountryController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-    #[Route('/country/list', name: 'app_country_list')]
+    #[Route('admin/country/list', name: 'app_country_list')]
     public function list(CountryRepository $countryRepository): Response
     {
         $countries = $countryRepository->findAll();
@@ -37,7 +37,7 @@ class CountryController extends AbstractController
         ]);
     }
 
-    #[Route('/country/edit/{id}', name: 'app_country_edit')]
+    #[Route('admin/country/edit/{id}', name: 'app_country_edit')]
     public function edit($id,CountryRepository $countryRepository, EntityManagerInterface $em, Request $request): Response
     {
         $country = $countryRepository->findOneBy(['id'=> $id]);
@@ -52,7 +52,7 @@ class CountryController extends AbstractController
         ]);
     }
     
-    #[Route('/country/delete/{id}', name: 'app_country_delete')]
+    #[Route('admin/country/delete/{id}', name: 'app_country_delete')]
     public function delete($id, CountryRepository $countryRepository, EntityManagerInterface $em): Response
     {
         $country = $countryRepository->findOneBy(['id'=> $id]);

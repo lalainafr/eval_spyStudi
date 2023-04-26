@@ -51,7 +51,7 @@ class HomeController extends AbstractController
 
 
 
-    #[Route('/detail/{id}', name: 'app_home_detail')]
+    #[Route('/home/detail/{id}', name: 'app_home_detail')]
     public function detail(MissionRepository $missionRepository, $id): Response
     {
         $mission =  $missionRepository->findOneBy(['id' => $id]);

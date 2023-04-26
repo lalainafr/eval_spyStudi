@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HideoutController extends AbstractController
 {
-    #[Route('/hideout/new', name: 'app_hideout_new')]
+    #[Route('admin/hideout/new', name: 'app_hideout_new')]
     public function new(EntityManagerInterface $em, Request $request): Response
     {
         $hideout = new Hideout();
@@ -28,7 +28,7 @@ class HideoutController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-    #[Route('/hideout/list', name: 'app_hideout_list')]
+    #[Route('admin/hideout/list', name: 'app_hideout_list')]
     public function list(HideoutRepository $hideoutRepository): Response
     {
         $hideouts = $hideoutRepository->findAll();
@@ -37,7 +37,7 @@ class HideoutController extends AbstractController
         ]);
     }
 
-    #[Route('/hideout/edit/{id}', name: 'app_hideout_edit')]
+    #[Route('admin/hideout/edit/{id}', name: 'app_hideout_edit')]
     public function edit($id, HideoutRepository $hideoutRepository, EntityManagerInterface $em, Request $request): Response
     {
         $hideout = $hideoutRepository->findOneBy(['id'=> $id]);
@@ -52,7 +52,7 @@ class HideoutController extends AbstractController
         ]);
     }
 
-    #[Route('/hideout/delete/{id}', name: 'app_hideout_delete')]
+    #[Route('admin/hideout/delete/{id}', name: 'app_hideout_delete')]
     public function delete($id, HideoutRepository $hideoutRepository, EntityManagerInterface $em): Response
     {
         $hideout = $hideoutRepository->findOneBy(['id'=> $id]);
