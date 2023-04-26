@@ -37,7 +37,7 @@ class TargetType extends AbstractType
         ->add('submit', SubmitType::class, [
             'label' => 'Valider',
             'attr' => [
-                'class' => 'btn btn-primary'
+                'class' => 'btn btn-secondary'
             ]
         ]);
     }

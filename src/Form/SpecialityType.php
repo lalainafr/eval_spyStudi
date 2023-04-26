@@ -19,7 +19,7 @@ class SpecialityType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => 'Valider',
                 'attr' => [
-                    'class' => 'btn btn-info'
+                    'class' => 'btn btn-secondary'
                 ]
             ])
         ;

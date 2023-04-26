@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}- Liste des MISSIONS
+{% block title %}- Gerer les MISSIONS
 {% endblock %}
 
 {% block body %}
 	<div class="container">
-		<h1 class='text-center'>LISTE DES MISSIONS</h1>
+		<h1 class='title text-center'>GERER LES MISSIONS</h1>
 		<br>
 		<br>
 		<a href="{{path('app_mission_new')}}">Ajouter</a>
@@ -18,23 +18,10 @@
 						</th>
 						<th scope="col">Description
 						</th>
-						<th scope="col">Code
-						</th>
-						<th scope="col">Agent
-						</th>
 						<th scope="col">Type
 						</th>
-						<th scope="col">Statut
-						</th>
+	
 						<th scope="col">Pays
-						</th>
-						<th scope="col">Specialité
-						</th>
-						<th scope="col">Planque
-						</th>
-						<th scope="col">Cible
-						</th>
-						<th scope="col">Contact
 						</th>
 						<th scope="col">Début
 						</th>
@@ -49,41 +36,11 @@
 							<td>{{mission.id}}</td>
 							<td>{{mission.title}}</td>
 							<td>{{mission.description}}</td>
-							<td>{{mission.codeName}}</td>
-							<td>
-								{% for agent in mission.agent %}
-									{{agent.firstName}}
-									{{agent.lastName}}
-								{% endfor %}
-							</td>
 							<td>
 								{{mission.type.name}}
 							</td>
 							<td>
-								{{mission.status.name}}
-							</td>
-							<td>
 								{{mission.country.name}}
-							</td>
-							<td>
-								{{mission.speciality.name}}
-							</td>
-							<td>
-								{% for hideout in mission.hideout %}
-									{{hideout.code}} <br>
-								{% endfor %}
-							</td>
-							<td>
-								{% for target in mission.target %}
-									{{target.getFirstName()}} 
-									{{target.getLastName()}} <br>
-								{% endfor %}
-							</td>
-							<td>
-								{% for contact in mission.contact %}
-									{{contact.getFirstName()}} 
-									{{contact.getLastName()}} <br>
-								{% endfor %}
 							</td>
 							<td>{{mission.startDate | date("d/m/Y")}}</td>
 							<td>{{mission.endDate | date("d/m/Y")}}</td>
@@ -92,6 +49,8 @@
 								<a href="{{path('app_mission_edit', {id: mission.id})}}">edit</a>
 								&nbsp
 								<a href="{{path('app_mission_delete', {id: mission.id})}}">delete</a>
+								&nbsp
+								<a href="{{path('app_home_detail', {id: mission.id})}}">Voir</a>
 							</td>
 						</tr>
 					</tbody>

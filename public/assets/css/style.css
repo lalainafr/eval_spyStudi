@@ -1,0 +1,14 @@
+* {
+    font-family: 'Roboto Mono', monospace;
+}
+
+img {
+    margin-left: 15px;
+    max-width: 7rem;
+    height: auto;
+}
+
+.title {
+    font-family: 'Black Ops One', cursive;
+    color: rgb(107, 93, 93, 0.4);
+}

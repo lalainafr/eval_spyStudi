@@ -6,7 +6,7 @@
 
 {% block body %}
 	<div class="container">
-		<h1 class='text-center'>DETAIL DE LA MISSION</h1>
+		<h1 class='title text-center'>DETAIL DE LA MISSION</h1>
 		<br>
 		<section>
 			<div class="row">
@@ -119,10 +119,6 @@
 					</p>
 					<p>
 						{{mission.endDate | date("d/m/Y")}}
-					</p>
-					<br>
-					<p>
-						<a href="{{path('app_home')}}">retour</a>
 					</p>
 				</div>
 			</div>
