@@ -4,17 +4,19 @@ namespace App\DataFixtures;
 
 use Faker\Factory;
 use App\Entity\Type;
+use App\Entity\User;
 use Faker\Generator;
 use App\Entity\Agent;
-use App\Entity\Contact;
 use App\Entity\Status;
+use App\Entity\Target;
+use App\Entity\Contact;
 use App\Entity\Country;
 use App\Entity\Hideout;
 use App\Entity\Mission;
 use App\Entity\Speciality;
-use App\Entity\Target;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
@@ -26,16 +28,34 @@ class AppFixtures extends Fixture
 
 
     private $reservations;
+    private UserPasswordHasherInterface $hasher;
 
-    public function __construct()
+
+    public function __construct(UserPasswordHasherInterface $hasher)
     {
         $this->faker = Factory::create('fr_FR');
+        $this->hasher = $hasher;
     }
 
     // Mise en place des FIXTURES
     public function load(ObjectManager $manager)
     {
-
+        //USER
+        $admin = new User();
+        $admin->setFullName($this->faker->name());
+        $admin->setEmail('admin@test.test');
+        $admin->setPassword($this->hasher->hashPassword($admin, 'Admin*123'));
+        $admin->setRoles(['ROLE_ADMIN', 'ROLE_USER']);
+        $manager->persist($admin);
+        
+        for ($i=0; $i < 2; $i++) { 
+            $user = new User();
+            $user->setFullName($this->faker->name());
+            $user->setEmail('user' . $i . '@test.test');
+            $user->setPassword($this->hasher->hashPassword($user, 'User*123'));
+            $user->setRoles(['ROLE_USER']);
+            $manager->persist($user);
+        }
 
         //COUNTRY
         for ($i = 0; $i < 4; $i++) {
