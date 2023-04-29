@@ -153,13 +153,13 @@ class AppFixtures extends Fixture
             $mission->setCodeName('COD - ' . $this->faker->word(8));
             $mission->setStartDate($this->faker->dateTimeBetween('+ 1 day', '+ 10 days'));
             $mission->setEndDate($this->faker->dateTimeBetween('+ 20 day', '+ 30 days'));
-            $mission->addAgent($agents[mt_rand(0, count($agents) - 1)]);
+            // $mission->addAgent($agents[mt_rand(0, count($agents) - 1)]);
             $mission->setType($typesArray[mt_rand(0, count($typesArray) - 1)]);
             $mission->setStatus($statusArray[mt_rand(0, count($statusArray) - 1)]);
             $mission->setCountry($countries[mt_rand(0, count($countries) - 1)]);
             $mission->setSpeciality($specialities[mt_rand(0, count($specialities) - 1)]);
             $mission->addHideout($hideouts[mt_rand(0, count($hideouts) - 1)]);
-            $mission->addTarget($targets[mt_rand(0, count($targets) - 1)]);
+            // $mission->addTarget($targets[mt_rand(0, count($targets) - 1)]);
             $mission->addContact($contacts[mt_rand(0, count($contacts) - 1)]);
 
             $manager->persist($mission);

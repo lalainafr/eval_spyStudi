@@ -8,25 +8,37 @@
 		<section class="row justify-content-center">
 			<h1 class='title text-center'>AJOUTER UNE MISSION</h1>
 			<br>
+			{# Message flash #}
+			{% for message in app.flashes('error') %}
+				<div class="alert alert-danger">
+					{{ message }}
+				</div>
+			{% endfor %}
 			<br>
-			<div class="col-md-4">
-				{{ form_start(form) }}
+			{{ form_start(form) }}
+			<div class="row justify-content-center">
 				<br>
-				{{ form_row(form.title) }}
-				{{ form_row(form.description) }}
-				{{ form_row(form.codeName) }}
-				{{ form_row(form.agent) }}
-				{{ form_row(form.type) }}
-				{{ form_row(form.status) }}
-				{{ form_row(form.country) }}
-				{{ form_row(form.speciality) }}
-				{{ form_row(form.hideout) }}
-				{{ form_row(form.target) }}
-				{{ form_row(form.contact) }}
-				{{ form_row(form.startDate) }}
-				{{ form_row(form.endDate) }}
-				<br>
-				{{ form_row(form.submit) }}
+				<div class="col-md-4">
+					{{ form_row(form.title) }}
+					{{ form_row(form.description) }}
+					{{ form_row(form.codeName) }}
+					{{ form_row(form.agent) }}
+					{{ form_row(form.type) }}
+				</div>
+				<div class="col-md-4">
+					{{ form_row(form.status) }}
+					{{ form_row(form.country) }}
+					{{ form_row(form.speciality) }}
+					{{ form_row(form.hideout) }}
+				</div>
+				<div class="col-md-4">
+					{{ form_row(form.target) }}
+					{{ form_row(form.contact) }}
+					{{ form_row(form.startDate) }}
+					{{ form_row(form.endDate) }}
+					<br>
+					{{ form_row(form.submit) }}
+				</div>
 				{{ form_end(form) }}
 			</div>
 		</section>
