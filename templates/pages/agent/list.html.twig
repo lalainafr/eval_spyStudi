@@ -20,13 +20,11 @@
 				<thead>
 					<tr>
 						<th scope="col">#</th>
-						<th scope="col">Prenom
+						<th scope="col">Prenom & Nom
 						</th>
-						<th scope="col">Nom
+						<th scope="col">Anniversaire
 						</th>
-						<th scope="col">Date d'anniversaire
-						</th>
-						<th scope="col">Code d'identification
+						<th scope="col">Code 
 						</th>
 						<th scope="col">Specialité
 						</th>
@@ -40,8 +38,8 @@
 					{% for agent in agents %}
 						<tr>
 							<td>{{agent.id}}</td>
-							<td>{{agent.firstName}}</td>
-							<td>{{agent.lastName}}</td>
+							<td>{{agent.firstName}}<br>
+							{{agent.lastName}}</td>
 							<td>{{agent.birthDate | date('d/m/Y')}}</td>
 							<td>{{agent.idCode}}</td>
 							<td>
