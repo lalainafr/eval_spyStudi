@@ -29,9 +29,6 @@
 	
 						<th scope="col">Pays
 						</th>
-						<th scope="col">Début
-						</th>
-						<th scope="col">Fin
 						</th>
 						<th scope="col">Action
 					</tr>
@@ -48,9 +45,6 @@
 							<td>
 								{{mission.country.name}}
 							</td>
-							<td>{{mission.startDate | date("d/m/Y")}}</td>
-							<td>{{mission.endDate | date("d/m/Y")}}</td>
-
 							<td>
 								<a href="{{path('app_mission_edit', {id: mission.id})}}">edit</a>
 								&nbsp

@@ -13,3 +13,8 @@ img {
     color: rgba(110, 115, 126, 0.357);
     font-size: 50px;
 }
+
+.filter{
+    background-color: rgb(165, 42, 42, 0.06);
+    padding: 10px;
+} 

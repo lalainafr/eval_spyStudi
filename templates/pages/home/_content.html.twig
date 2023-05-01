@@ -1,6 +1,5 @@
 <section>
-		<h1 class='title text-center'>VOIR LES MISSIONS</h1>
-		<br>
+		
 		<br>
 			<table class="table">
 				<thead>
@@ -13,10 +12,6 @@
 						<th scope="col">Type
 						</th>
 						<th scope="col">Status
-						</th>
-						<th scope="col">Début
-						</th>
-						<th scope="col">Fin
 						</th>
 						<th scope="col">Detail
 						</th>
@@ -34,8 +29,6 @@
 							<td>
 								{{mission.status.name}}
 							</td>
-							<td>{{mission.startDate | date("d/m/Y")}}</td>
-							<td>{{mission.endDate | date("d/m/Y")}}</td>
 							<td>
 								<a href="{{path('app_home_detail', {id: mission.id})}}">Voir</a>
 							</td>
