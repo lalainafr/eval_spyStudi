@@ -22,6 +22,8 @@ class ContactController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($contact);
             $em->flush();
+            $this->addFlash('success', 'Le contact a été créé avec succes');
+
             return $this->redirectToRoute('app_contact_list');
         }
         return $this->render('pages/contact/new.html.twig', [
@@ -45,6 +47,8 @@ class ContactController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
+            $this->addFlash('success', 'Le contact a été modifié avec succes');
+
             return $this->redirectToRoute('app_contact_list');
         }
         return $this->render('pages/contact/edit.html.twig', [
@@ -58,6 +62,8 @@ class ContactController extends AbstractController
         $contact = $contactRepository->findOneBy(['id'=> $id]);
         $em->remove($contact);
         $em->flush();
+        $this->addFlash('success', 'Le contact a été supprimé avec succes');
+
         return $this->redirectToRoute('app_contact_list');
     }  
 }

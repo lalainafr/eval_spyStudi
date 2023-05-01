@@ -82,10 +82,10 @@ class AppFixtures extends Fixture
             $agent->setlastName($this->faker->lastName());
             $agent->setBirthDate($this->faker->dateTimeBetween('- 30 year', '- 20 year'));
             $agent->setIdCode($this->faker->text(8));
-            for ($j = 0; $j < mt_rand(1, 3); $j++) {
-                $agent->addSpeciality($specialities[mt_rand(0, count($specialities) - 1)]);
-            }
-            $agent->setNationality($countries[mt_rand(0, count($countries) - 1)]);
+            // Au moins un agent doit disposer de la spécialité requise dans la mission
+            $agent->addSpeciality($specialities[0]);
+            // La nationalité des cibles doivent etre differentes des agents
+            $agent->setNationality($countries[mt_rand(1, count($countries) - 1)]);
             $manager->persist($agent);
             $agents[] = $agent;
         }
@@ -115,7 +115,8 @@ class AppFixtures extends Fixture
             $hideout->setCode('PLQ - ' . $this->faker->text(8));
             $hideout->setAddress($this->faker->address());
             $hideout->setType('PLTYPE - ' . $this->faker->text(8));
-            $hideout->setCountry($countries[mt_rand(0, count($countries) - 1)]);
+            // Les planques doivent avoir la même nationlaité que la mission
+            $hideout->setCountry($countries[0]);
             $manager->persist($hideout);
             $hideouts[] = $hideout;
         }
@@ -127,7 +128,8 @@ class AppFixtures extends Fixture
             $target->setLastName($this->faker->lastName());
             $target->setBirthDate($this->faker->dateTimeBetween('-40 years', '-20years'));
             $target->setCodeName('CIB - ' . $this->faker->text(8));
-            $target->setNationality($countries[mt_rand(0, count($countries) - 1)]);
+            // La nationalité des cibles doivent etre differentes des agents
+            $target->setNationality($countries[0]);
             $manager->persist($target);
             $targets[] = $target;
         }
@@ -139,7 +141,8 @@ class AppFixtures extends Fixture
             $contact->setLastName($this->faker->lastName());
             $contact->setBirthDate($this->faker->dateTimeBetween('-40 years', '-20years'));
             $contact->setCodeName('CTC - ' . $this->faker->text(8));
-            $contact->setNationality($countries[mt_rand(0, count($countries) - 1)]);
+            // Les contacts doit avoir la même nationlaité que la mission
+            $contact->setNationality($countries[0]);
             $manager->persist($contact);
             $contacts[] = $contact;
         }
@@ -153,13 +156,15 @@ class AppFixtures extends Fixture
             $mission->setCodeName('COD - ' . $this->faker->word(8));
             $mission->setStartDate($this->faker->dateTimeBetween('+ 1 day', '+ 10 days'));
             $mission->setEndDate($this->faker->dateTimeBetween('+ 20 day', '+ 30 days'));
-            // $mission->addAgent($agents[mt_rand(0, count($agents) - 1)]);
+            $mission->addAgent($agents[mt_rand(0, count($agents) - 1)]);
             $mission->setType($typesArray[mt_rand(0, count($typesArray) - 1)]);
             $mission->setStatus($statusArray[mt_rand(0, count($statusArray) - 1)]);
-            $mission->setCountry($countries[mt_rand(0, count($countries) - 1)]);
-            $mission->setSpeciality($specialities[mt_rand(0, count($specialities) - 1)]);
+            // Au moins un agent doit disposer de la spécialité requise dans la mission
+            $mission->setSpeciality($specialities[0]);
+            // Les contacts et les planques doivent avoir la même nationlaité que la mission
+            $mission->setCountry($countries[0]);
             $mission->addHideout($hideouts[mt_rand(0, count($hideouts) - 1)]);
-            // $mission->addTarget($targets[mt_rand(0, count($targets) - 1)]);
+            $mission->addTarget($targets[mt_rand(0, count($targets) - 1)]);
             $mission->addContact($contacts[mt_rand(0, count($contacts) - 1)]);
 
             $manager->persist($mission);

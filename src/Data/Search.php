@@ -17,7 +17,7 @@ class Search
     /**
      * @var array
      */
-    public $country = [];
+    public $status = [];
 
 
 }

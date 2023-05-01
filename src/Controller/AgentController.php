@@ -32,6 +32,7 @@ class AgentController extends AbstractController
             $agent = $form->getData();
             $em->persist($agent);
             $em->flush();
+            $this->addFlash('success', 'L\'agent a été créé avec succes');
             return $this->redirectToRoute('app_agent_list');
         }
         return $this->render('pages/agent/new.html.twig', [
@@ -48,6 +49,8 @@ class AgentController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
+            $this->addFlash('success', 'L\'agent a été modifié avec succes');
+
             return $this->redirectToRoute('app_agent_list');
         }
         return $this->render('pages/agent/edit.html.twig', [
@@ -61,6 +64,8 @@ class AgentController extends AbstractController
         $agent = $agentRepository->findOneBy(['id' => $id]);
         $em->remove($agent);
         $em->flush();
+        $this->addFlash('success', 'L\'agent a été supprimé avec succes');
+
         return $this->redirectToRoute('app_agent_list');
         
     }

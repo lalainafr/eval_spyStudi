@@ -7,6 +7,12 @@
 	<div class="container">
 		<h1 class='title text-center'>LISTE DES STATUS DE MISSIONS</h1>
 		<br>
+		{# Message flash #}
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
 		<br>
 		<a href="{{path('app_status_new')}}">Ajouter</a>
 		<section>

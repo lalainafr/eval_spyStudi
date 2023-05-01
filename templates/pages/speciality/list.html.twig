@@ -8,6 +8,12 @@
 	<div class="container">
 		<h1 class='title text-center'>LISTE DES SPECIALITES</h1>
 		<br>
+		{# Message flash #}
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
 		<br>
 		<a href="{{path('app_speciality_new')}}">Ajouter</a>
 		<section>

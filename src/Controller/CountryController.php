@@ -22,6 +22,8 @@ class CountryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($country);
             $em->flush();
+            $this->addFlash('success', 'Le pays a été créé avec succes');
+
             return $this->redirectToRoute('app_country_list');
         }
         return $this->render('pages/country/new.html.twig', [
@@ -45,6 +47,8 @@ class CountryController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
+            $this->addFlash('success', 'Le pays a été modifié avec succes');
+
             return $this->redirectToRoute('app_country_list');
         }
         return $this->render('pages/country/edit.html.twig', [
@@ -58,6 +62,8 @@ class CountryController extends AbstractController
         $country = $countryRepository->findOneBy(['id'=> $id]);
         $em->remove($country);
         $em->flush();
+        $this->addFlash('success', 'Le pays a été supprimé avec succes');
+
         return $this->redirectToRoute('app_country_list');
     }  
 }

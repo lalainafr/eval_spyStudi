@@ -32,6 +32,8 @@ class SpecialityController extends AbstractController
             $speciality = $form->getData();
             $em->persist($speciality);
             $em->flush();
+            $this->addFlash('success', 'La specialité a été créée avec succes');
+
             return $this->redirectToRoute('app_speciality_list');
         }
         return $this->render('pages/speciality/new.html.twig', [
@@ -47,6 +49,8 @@ class SpecialityController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
+            $this->addFlash('success', 'La specialité a été modifiée avec succes');
+
             return $this->redirectToRoute('app_speciality_list');
         }
         return $this->render('pages/speciality/edit.html.twig', [
@@ -60,6 +64,8 @@ class SpecialityController extends AbstractController
         $speciality =  $specialityRepository->findOneBy(['id' => $id]);
         $em->remove($speciality);
         $em->flush();
+        $this->addFlash('success', 'La specialité a été supprimée avec succes');
+
         return $this->redirectToRoute('app_speciality_list');
     }
 }

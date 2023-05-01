@@ -22,6 +22,8 @@ class TypeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($type);
             $em->flush();
+            $this->addFlash('success', 'Le type de mission a été créé avec succes');
+
             return $this->redirectToRoute('app_type_list');
         }
         return $this->render('pages/type/new.html.twig', [
@@ -45,6 +47,8 @@ class TypeController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
+            $this->addFlash('success', 'Le type de mission a été modifié avec succes');
+
             return $this->redirectToRoute('app_type_list');
         }
         return $this->render('pages/type/edit.html.twig', [
@@ -58,6 +62,8 @@ class TypeController extends AbstractController
         $type = $typeRepository->findOneBy(['id'=> $id]);
         $em->remove($type);
         $em->flush();
+        $this->addFlash('success', 'Le type de mission a été supprimé avec succes');
+
         return $this->redirectToRoute('app_type_list');
 
     }

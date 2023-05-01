@@ -21,6 +21,8 @@ class TargetController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($target);
+            $this->addFlash('success', 'Le cible a été créé avec succes');
+
             $em->flush();
             return $this->redirectToRoute('app_target_list');
         }
@@ -45,6 +47,8 @@ class TargetController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
+            $this->addFlash('success', 'Le cible a été modifié avec succes');
+
             return $this->redirectToRoute('app_target_list');
         }
         return $this->render('pages/target/edit.html.twig', [
@@ -58,6 +62,8 @@ class TargetController extends AbstractController
         $target = $targetRepository->findOneBy(['id'=> $id]);
         $em->remove($target);
         $em->flush();
+        $this->addFlash('success', 'Le cible a été supprimé avec succes');
+
         return $this->redirectToRoute('app_target_list');
     }  
 }

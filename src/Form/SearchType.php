@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Country;
 use App\Data\Search;
+use App\Entity\Status;
 use App\Entity\Type;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -23,10 +24,10 @@ class SearchType extends AbstractType
                     'placeholder' => 'Rechercher...'
                 ]
             ])
-            ->add('country', EntityType::class, [
+            ->add('status', EntityType::class, [
                 'label' => false,
                 'required' => false,
-                'class' => Country::class,
+                'class' => Status::class,
                 'expanded' => true,
                 'multiple' => true,
             ])

@@ -7,6 +7,7 @@ use App\Entity\Mission;
 use App\Form\MissionType;
 use App\Repository\MissionRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,9 +17,16 @@ class MissionController extends AbstractController
 {
 
     #[Route('admin/mission/list', name: 'app_mission_list')]
-    public function list(MissionRepository $missionRepository): Response
+    public function list(MissionRepository $missionRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        $missions =  $missionRepository->findAll();
+        $missionList =  $missionRepository->findAll();
+        $missions = $paginator->paginate(
+            $missionList,
+            // numero de page
+            $request->query->getInt('page', 1),
+            // limite par page
+            10
+        );
         return $this->render('pages/mission/list.html.twig', [
             'missions' => $missions,
         ]);
@@ -101,6 +109,9 @@ class MissionController extends AbstractController
 
             $em->persist($mission);
             $em->flush();
+
+            $this->addFlash('success', 'La mission a été créée avec succes');
+
             return $this->redirectToRoute('app_mission_list');
         }
         return $this->render('pages/mission/new.html.twig', [
@@ -183,6 +194,9 @@ class MissionController extends AbstractController
                 }
 
             $em->flush();
+
+            $this->addFlash('success', 'La mission a été modifiée avec succes');
+
             return $this->redirectToRoute('app_mission_list');
         }
         return $this->render('pages/mission/edit.html.twig', [
@@ -196,6 +210,8 @@ class MissionController extends AbstractController
         $mission =  $missionRepository->findOneBy(['id' => $id]);
         $em->remove($mission);
         $em->flush();
+        $this->addFlash('success', 'La mission a été supprimée avec succes');
+
         return $this->redirectToRoute('app_mission_list');
     }
 

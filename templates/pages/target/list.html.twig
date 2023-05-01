@@ -7,6 +7,12 @@
 	<div class="container">
 		<h1 class='title text-center'>LISTE DES CIBLES</h1>
 		<br>
+		{# Message flash #}
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
 		<br>
 		<a href="{{path('app_target_new')}}">Ajouter</a>
 		<section>
@@ -36,12 +42,7 @@
 							<td>{{target.lastName}}</td>
 							<td>{{target.birthDate | date('d/m/Y')}}</td>
 							<td>{{target.codeName}}</td>
-							<td>
-								{% for nationality in target.nationality %}
-									{{nationality.name}}
-									<br>
-								{% endfor %}
-							</td>
+							<td>{{target.nationality}}</td>
 							<td>
 								<a href="{{path('app_target_edit', {id: target.id})}}">edit</a>
 								&nbsp

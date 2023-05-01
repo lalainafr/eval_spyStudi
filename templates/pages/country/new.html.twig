@@ -8,6 +8,12 @@
 		<section class="row justify-content-center">
 			<h1 class='title text-center'>AJOUTER UN PAYS</h1>
 			<br>
+			{# Message flash #}
+            {% for message in app.flashes('succes') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
 			<br>
 			<div class="col-md-4">
 				{{ form_start(form) }}

@@ -22,6 +22,8 @@ class StatusController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($status);
             $em->flush();
+            $this->addFlash('success', 'Le statut a été créé avec succes');
+
             return $this->redirectToRoute('app_status_list');
         }
         return $this->render('pages/status/new.html.twig', [
@@ -45,6 +47,8 @@ class StatusController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
+            $this->addFlash('success', 'Le statut a été modifié avec succes');
+
             return $this->redirectToRoute('app_status_list');
         }
         return $this->render('pages/status/edit.html.twig', [
@@ -58,6 +62,8 @@ class StatusController extends AbstractController
         $status = $statusRepository->findOneBy(['id'=> $id]);
         $em->remove($status);
         $em->flush();
+        $this->addFlash('success', 'Le statut a été supprimé avec succes');
+
         return $this->redirectToRoute('app_status_list');
     }  
 }

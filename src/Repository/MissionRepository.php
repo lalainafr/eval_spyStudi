@@ -53,8 +53,8 @@ class MissionRepository extends ServiceEntityRepository
             ->select('t', 'm')
             ->join('m.type', 't')
 
-            ->select('c', 'm')
-            ->join('m.country', 'c');
+            ->select('s', 'm')
+            ->join('m.status', 's');
 
         if (!empty($search->q)) {
             $query = $query
@@ -62,10 +62,10 @@ class MissionRepository extends ServiceEntityRepository
                 ->setParameter('q', "%{$search->q}%");
         }
 
-        if (!empty($search->country)) { {
+        if (!empty($search->status)) { {
                 $query = $query
-                    ->andWhere('c.id IN (:country)')
-                    ->setParameter('country', $search->country);
+                    ->andWhere('s.id IN (:status)')
+                    ->setParameter('status', $search->status);
             }
         }
 

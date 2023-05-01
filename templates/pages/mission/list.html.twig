@@ -7,6 +7,12 @@
 	<div class="container">
 		<h1 class='title text-center'>GERER LES MISSIONS</h1>
 		<br>
+		{# Message flash #}
+			{% for message in app.flashes('success') %}
+				<div class="alert alert-success">
+					{{ message }}
+				</div>
+			{% endfor %}
 		<br>
 		<a href="{{path('app_mission_new')}}">Ajouter</a>
 		<section>
@@ -59,4 +65,7 @@
 			</tbody>
 		</table>
 	</section>
+	<div class="navigation">
+		{{ knp_pagination_render(missions,'@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig')}}
+	</div>
 </div>{% endblock %}

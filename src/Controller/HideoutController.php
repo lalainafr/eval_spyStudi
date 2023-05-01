@@ -22,6 +22,8 @@ class HideoutController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($hideout);
             $em->flush();
+            $this->addFlash('success', 'La planque a été créée avec succes');
+
             return $this->redirectToRoute('app_hideout_list');
         }
         return $this->render('pages/hideout/new.html.twig', [
@@ -45,6 +47,8 @@ class HideoutController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
+            $this->addFlash('success', 'La planque a été modifiée avec succes');
+
             return $this->redirectToRoute('app_hideout_list');
         }
         return $this->render('pages/hideout/edit.html.twig', [
@@ -58,6 +62,8 @@ class HideoutController extends AbstractController
         $hideout = $hideoutRepository->findOneBy(['id'=> $id]);
         $em->remove($hideout);
         $em->flush();
+        $this->addFlash('success', 'La planque a été supprimée avec succes');
+
         return $this->redirectToRoute('app_hideout_list');
     }    
       
