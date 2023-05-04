@@ -10,7 +10,7 @@
     {# rajouter un id pour le cibler en JS #}
     {{ form_start(form, {'attr': {'id':'filters'}})}}
     
-    {# securité contre les attaques xss et les injections sql #}
+    {# securité contre les attaques XSS et les injections SQL #}
     {{ form_row(form.q | raw )}}
     <br>
     <h5>STATUT</h5>
