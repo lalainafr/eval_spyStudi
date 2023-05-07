@@ -47,15 +47,6 @@ class AppFixtures extends Fixture
         $admin->setPassword($this->hasher->hashPassword($admin, 'Admin*123'));
         $admin->setRoles(['ROLE_ADMIN', 'ROLE_USER']);
         $manager->persist($admin);
-        
-        for ($i=0; $i < 2; $i++) { 
-            $user = new User();
-            $user->setFullName($this->faker->name());
-            $user->setEmail('user' . $i . '@test.test');
-            $user->setPassword($this->hasher->hashPassword($user, 'User*123'));
-            $user->setRoles(['ROLE_USER']);
-            $manager->persist($user);
-        }
 
         //COUNTRY
         for ($i = 0; $i < 4; $i++) {
